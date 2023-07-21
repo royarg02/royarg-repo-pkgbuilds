@@ -1,0 +1,4 @@
+#!/bin/sh
+
+lf --version
+

@@ -1,0 +1,26 @@
+pkgbase = lf-royarg-bin
+	pkgdesc = A terminal file manager inspired by ranger(precompiled binary)
+	pkgver = 28
+	pkgrel = 1
+	url = https://github.com/gokcehan/lf
+	arch = i686
+	arch = x86_64
+	arch = armv7h
+	license = MIT
+	provides = lf
+	conflicts = lf
+	conflicts = lf-bin
+	source = https://github.com/gokcehan/lf/raw/r28/lf.1
+	source = https://github.com/gokcehan/lf/raw/r28/lf.desktop
+	source = https://github.com/gokcehan/lf/raw/r28/LICENSE
+	sha256sums = 4e256c47533ec4afd4150b059c202daed94de3ad2f58a2c61646f8b3993194d0
+	sha256sums = 8435d4ac067dc81aedacc2cbc67d72449e39027ff3ec55d2b3910f3712dd1f74
+	sha256sums = 077f3c8aa73a4886221438f9df5c1551baab43c6a0f2e7cddf56f436e8b63480
+	source_i686 = lf-28-linux-386.tar.gz::https://github.com/gokcehan/lf/releases/download/r28/lf-linux-386.tar.gz
+	sha256sums_i686 = 33cb113e8aabd97241165f707305e6339fc2c38f0a67e6f412216d41b1535ef9
+	source_x86_64 = lf-28-linux-amd64.tar.gz::https://github.com/gokcehan/lf/releases/download/r28/lf-linux-amd64.tar.gz
+	sha256sums_x86_64 = 4ef583838437fe1f4a3dcec78c96679c6b79e2e5405432efe9baa7ee341746c5
+	source_armv7h = lf-28.linux-arm.tar.gz::https://github.com/gokcehan/lf/releases/download/r28/lf-linux-arm.tar.gz
+	sha256sums_armv7h = 236422b23952b1e5cbacde04a65b8cf888e3eec8a4a7f64b94a9f838aa3ab2b4
+
+pkgname = lf-royarg-bin
