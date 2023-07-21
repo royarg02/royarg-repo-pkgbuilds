@@ -2,7 +2,7 @@
 _pkgname="dwm"
 pkgname="$_pkgname-royarg-git"
 pkgver=6.4.r6.55dc23f
-pkgrel=1
+pkgrel=2
 pkgdesc="A modified version of the dynamic window manager for X."
 arch=('i686' 'x86_64')
 url="https://github.com/RoyARG02/$_pkgname"
