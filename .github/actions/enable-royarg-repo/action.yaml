@@ -1,0 +1,17 @@
+name: Enable royarg-repo unofficial ArchLinux repository
+description: 'Enables royarg-repo for fetching dependencies while building packages'
+
+runs:
+  using: "composite"
+  steps:
+    - run: |
+        pacman-key --init
+        wget -O ${RUNNER_TEMP}/royarg-repo-key.txt https://royarg02.github.io/royarg-repo/key.txt
+        pacman-key --add ${RUNNER_TEMP}/royarg-repo-key.txt
+        pacman-key --lsign-key BCFCC858
+        cat << "END" >> /etc/pacman.conf
+        [royarg-repo]
+        Server = https://royarg02.github.io/$repo/os/$arch
+        END
+        pacman -Sy
+      shell: bash

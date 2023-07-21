@@ -1,0 +1,74 @@
+name: Package upload
+on:
+  push:
+    paths:
+      - '**/PKGBUILD'
+      - '**/.SRCINFO'
+    branches:
+      - master
+
+jobs:
+  changes:
+    uses: ./.github/workflows/detect-changes.yaml
+    with:
+      event: ${{ github.event_name }}
+
+  package-upload:
+    needs: changes
+    strategy:
+      matrix:
+        package: ${{ fromJSON(needs.changes.outputs.packages) }}
+    runs-on: ubuntu-latest
+    container:
+      image: archlinux/archlinux:base-devel
+    permissions:
+      contents: write
+    defaults:
+      run:
+        working-directory: ${{ matrix.package }}
+    steps:
+      - name: Checkout build files
+        uses: actions/checkout@c85c95e3d7251135ab7dc9ce3241c5835cc595a9
+      - name: Update container image
+        run: pacman -Syu --noconfirm
+      - name: Install git and wget
+        run: pacman -S --needed --noconfirm git wget
+      - name: Enable "royarg-repo" repository
+        uses: ./.github/actions/enable-royarg-repo
+      - name: Import GPG key for signing package
+        uses: crazy-max/ghaction-import-gpg@72b6676b71ab476b77e676928516f6982eef7a41
+        with:
+          gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
+          passphrase: ${{ secrets.GPG_PASSPHRASE }}
+      - name: Modify permissions for build directories
+        uses: ./.github/actions/perm-build-dirs
+      - name: Add packager information
+        run: |
+          cat << END >> /etc/makepkg.conf
+          PACKAGER="Anurag Roy <anuragr9847@gmail.com>"
+          END
+      - name: Build package
+        run: sudo -u nobody makepkg --syncdeps --noconfirm
+      - name: Sign packages
+        run: |
+          for pkgfile in $(sudo -u nobody makepkg --packagelist); do
+            gpg --detach-sign --pinentry-mode loopback --passphrase --passphrase-fd 0 --output "${pkgfile}.sig" --sign "${pkgfile}" <<< "${{ secrets.GPG_PASSPHRASE }}"
+          done
+      - name: Checkout package repository
+        uses: actions/checkout@c85c95e3d7251135ab7dc9ce3241c5835cc595a9
+        with:
+          repository: 'royarg02/royarg-repo'
+          path: 'royarg-repo'
+          token: ${{ secrets.GH_PAT }}
+      - name: Move built files to package repository
+        run: |
+          for pkgfile in $(sudo -u nobody makepkg --packagelist); do
+            mv "${pkgfile}"{,.sig} ${GITHUB_WORKSPACE}/royarg-repo/os/x86_64/
+          done
+      - name: Push new files to package repository
+        uses: EndBug/add-and-commit@1bad3abcf0d6ec49a5857d124b0bfb52dc7bb081
+        with:
+          message: 'Package update from https://github.com/${{ github.repository }}/commit/${{ github.sha }}'
+          cwd: 'royarg-repo'
+          default_author: github_actions
+

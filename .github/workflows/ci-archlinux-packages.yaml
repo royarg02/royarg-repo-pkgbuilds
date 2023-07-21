@@ -1,0 +1,59 @@
+name: CI
+on:
+  pull_request:
+    types:
+      - opened
+      - edited
+      - synchronize
+    paths:
+      - '**/PKGBUILD'
+      - '**/.SRCINFO'
+    branches:
+      - master
+
+jobs:
+  changes:
+    permissions:
+      pull-requests: read
+    uses: ./.github/workflows/detect-changes.yaml
+    with:
+      event: ${{ github.event_name }}
+
+  validate:
+    needs: changes
+    strategy:
+      matrix:
+        package: ${{ fromJSON(needs.changes.outputs.packages) }}
+    runs-on: ubuntu-latest
+    container:
+      image: archlinux/archlinux:base-devel
+    defaults:
+      run:
+        working-directory: ${{ matrix.package }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@c85c95e3d7251135ab7dc9ce3241c5835cc595a9
+      - name: Update container image
+        run: pacman -Syu --noconfirm
+      - name: Install git, namcap and wget
+        run: pacman -S --needed --noconfirm git namcap wget
+      - name: Enable "royarg-repo" repository
+        uses: ./.github/actions/enable-royarg-repo
+      - name: Modify permissions for build directories
+        uses: ./.github/actions/perm-build-dirs
+      - name: Validate PKGBUILD
+        run: namcap PKGBUILD
+      - name: Validate SRCINFO
+        run: sudo -u nobody makepkg --printsrcinfo | diff --ignore-blank-lines .SRCINFO -
+      - name: Build and validate package files
+        run: |
+          sudo -u nobody makepkg --syncdeps --noconfirm
+          for pkgfile in $(sudo -u nobody makepkg --packagelist); do
+            namcap "${pkgfile}"
+            pacman -Qilp "${pkgfile}"
+          done
+      - name: Install package and run test script
+        run: |
+          sudo -u nobody makepkg --install --noconfirm
+          bash -x test.sh
+
