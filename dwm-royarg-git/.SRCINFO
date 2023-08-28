@@ -12,7 +12,7 @@ pkgbase = dwm-royarg-git
 	provides = dwm
 	conflicts = dwm
 	conflicts = dwm-git
-	source = git+https://github.com/RoyARG02/dwm.git
+	source = git+https://github.com/royarg02/dwm.git
 	md5sums = SKIP
 
 pkgname = dwm-royarg-git
