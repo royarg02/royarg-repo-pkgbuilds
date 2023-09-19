@@ -13,3 +13,7 @@ source=("$url/raw/r$pkgver/LICENSE")
 sha256sums=('077f3c8aa73a4886221438f9df5c1551baab43c6a0f2e7cddf56f436e8b63480')
 install="$pkgname.install"
 
+package() {
+  install -Dm644 -t "${pkgdir}/usr/share/licenses/${pkgname}" "LICENSE"
+}
+
