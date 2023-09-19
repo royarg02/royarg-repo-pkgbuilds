@@ -9,5 +9,7 @@ url="https://github.com/gokcehan/$_pkgname"
 license=('MIT')
 provides=('lf')
 conflicts=("$_pkgname" "$_pkgname-bin")
+source=("$url/raw/r$pkgver/LICENSE")
+sha256sums=('077f3c8aa73a4886221438f9df5c1551baab43c6a0f2e7cddf56f436e8b63480')
 install="$pkgname.install"
 

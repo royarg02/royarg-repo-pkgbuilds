@@ -11,5 +11,7 @@ pkgbase = lf-royarg-bin
 	provides = lf
 	conflicts = lf
 	conflicts = lf-bin
+	source = https://github.com/gokcehan/lf/raw/r30/LICENSE
+	sha256sums = 077f3c8aa73a4886221438f9df5c1551baab43c6a0f2e7cddf56f436e8b63480
 
 pkgname = lf-royarg-bin
