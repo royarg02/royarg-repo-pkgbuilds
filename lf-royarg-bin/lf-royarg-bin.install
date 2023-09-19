@@ -1,0 +1,14 @@
+#!/bin/sh
+
+post_install() {
+  cat << END
+╔════════════════════════════════════════════════════════════════════════════╗
+║ This package has been deprecated and will be removed from "royarg-repo" in ║
+║ the future. Please install "lf" from the official ArchLinux repositories.  ║
+╚════════════════════════════════════════════════════════════════════════════╝
+END
+}
+
+post_upgrade() {
+  post_install
+}

@@ -2,29 +2,12 @@
 _pkgname='lf'
 pkgname="$_pkgname-royarg-bin"
 pkgver=30
-pkgrel=1
-pkgdesc='A terminal file manager inspired by ranger(precompiled binary)'
+pkgrel=2
+pkgdesc='A terminal file manager inspired by ranger(deprecated dummy package)'
 arch=('i686' 'x86_64' 'armv7h')
 url="https://github.com/gokcehan/$_pkgname"
 license=('MIT')
 provides=('lf')
 conflicts=("$_pkgname" "$_pkgname-bin")
-source=("$url/raw/r$pkgver/lf.1"
-        "$url/raw/r$pkgver/lf.desktop"
-        "$url/raw/r$pkgver/LICENSE")
-source_i686=("$_pkgname-$pkgver-linux-386.tar.gz::${url}/releases/download/r${pkgver}/lf-linux-386.tar.gz")
-source_x86_64=("$_pkgname-$pkgver-linux-amd64.tar.gz::${url}/releases/download/r${pkgver}/lf-linux-amd64.tar.gz")
-source_armv7h=("$_pkgname-$pkgver.linux-arm.tar.gz::${url}/releases/download/r${pkgver}/lf-linux-arm.tar.gz")
-sha256sums=('21c5346920ccf9aebbdb16d3316de38112bc6eb264b8099a3d08747f2097aeb9'
-            '8435d4ac067dc81aedacc2cbc67d72449e39027ff3ec55d2b3910f3712dd1f74'
-            '077f3c8aa73a4886221438f9df5c1551baab43c6a0f2e7cddf56f436e8b63480')
-sha256sums_i686=('d0c493576f469a50b682942eab5efeaa0d1007e253fc5057f1f0717e5683b44b')
-sha256sums_x86_64=('8185b7838f84c3f8a9355b76229d24daf155f9001cfd3e3666ead546560d87d7')
-sha256sums_armv7h=('5eeb67a57a647b7b9eefadee229474c589fbd598468c3890bce65966e6ecd788')
+install="$pkgname.install"
 
-package() {
-  install -Dm755 -t "$pkgdir/usr/bin" "lf"
-  install -Dm644 -t "$pkgdir/usr/share/man/man1" "lf.1"
-  install -Dm644 -t "$pkgdir/usr/share/applications" "lf.desktop"
-  install -Dm644 -t "${pkgdir}/usr/share/licenses/${pkgname}" "LICENSE"
-}
