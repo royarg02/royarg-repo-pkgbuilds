@@ -1,4 +1,4 @@
 #!/bin/sh
 
-lf --version
+echo 'This is a dummy package, skip tests'
 
