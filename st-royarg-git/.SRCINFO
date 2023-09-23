@@ -1,6 +1,6 @@
 pkgbase = st-royarg-git
 	pkgdesc = A modified version of the simple virtual terminal emulator for X.
-	pkgver = 0.9.r6.0235d38
+	pkgver = 0.9.r7.2d3a0df
 	pkgrel = 1
 	url = https://github.com/RoyARG02/st
 	arch = i686
