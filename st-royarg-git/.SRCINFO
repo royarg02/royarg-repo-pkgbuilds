@@ -2,7 +2,7 @@ pkgbase = st-royarg-git
 	pkgdesc = A modified version of the simple virtual terminal emulator for X.
 	pkgver = 0.9.r7.2d3a0df
 	pkgrel = 1
-	url = https://github.com/RoyARG02/st
+	url = https://github.com/royarg02/st
 	arch = i686
 	arch = x86_64
 	arch = armv7h
@@ -14,7 +14,7 @@ pkgbase = st-royarg-git
 	provides = st
 	conflicts = st
 	conflicts = st-git
-	source = git+https://github.com/RoyARG02/st.git
+	source = git+https://github.com/royarg02/st.git
 	md5sums = SKIP
 
 pkgname = st-royarg-git
