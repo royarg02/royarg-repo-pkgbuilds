@@ -32,7 +32,7 @@ jobs:
         working-directory: ${{ matrix.package }}
     steps:
       - name: Checkout
-        uses: actions/checkout@3df4ab11eba7bda6032a0b82a6bb43b11571feac
+        uses: actions/checkout@8ade135a41bc03ea155e62e844d188df1ea18608
       - name: Update container image
         run: pacman -Syu --noconfirm
       - name: Install git, namcap and wget
