@@ -38,6 +38,8 @@ update() {
 
 trap cleanup INT EXIT
 
+[ $# = 0 ] && echo "USAGE: $0 pkg-dir-1 [pkg-dir-2 [pkg-dir-3]...]]" && exit 1
+
 for package in "$@"; do
   [ -n "$package" ] && cd "$package" && update "$package"
 done
