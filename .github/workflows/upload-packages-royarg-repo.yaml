@@ -63,7 +63,7 @@ jobs:
       - name: Move built files to package repository
         run: |
           for pkgfile in $(sudo -u nobody makepkg --packagelist); do
-            mv "${pkgfile}"{,.sig} ${GITHUB_WORKSPACE}/royarg-repo/os/x86_64/
+            mv "${pkgfile}"{,.sig} ${GITHUB_WORKSPACE}/royarg-repo/static/os/x86_64/
           done
       - name: Push new files to package repository
         uses: EndBug/add-and-commit@1bad3abcf0d6ec49a5857d124b0bfb52dc7bb081
