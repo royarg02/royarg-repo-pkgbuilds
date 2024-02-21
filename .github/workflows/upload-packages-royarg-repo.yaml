@@ -47,6 +47,8 @@ jobs:
           cat << END >> /etc/makepkg.conf
           PACKAGER="Anurag Roy <anuragr9847@gmail.com>"
           END
+      - name: Disable building debug packages
+        run: sed -i '/^OPTIONS/ s/ debug/ !debug/' /etc/makepkg.conf
       - name: Build package
         run: sudo -u nobody makepkg --syncdeps --noconfirm
       - name: Sign packages
