@@ -1,17 +1,17 @@
 # Maintainer: Anurag Roy <anuragr9847@gmail.com>
 pkgname="xivr"
-pkgver=1.0.1
+pkgver=1.0.0
 pkgrel=1
 pkgdesc='Wrapper for *sxiv with nice features'
 arch=('x86_64')
 url="https://github.com/royarg02/${pkgname}"
 license=('GPL-3.0-or-later')
 depends=('nsxiv' 'util-linux')
-makedepends=('git' 'dart')
+makedepends=('dart')
 optdepends=('sxiv: alternative image viewer')
 source=("git+${url}#tag=${pkgver}"
         "xivr.desktop")
-sha256sums=('5e60d588334ad152c8588fdbbd18ac6c157595c45323818b358cb9b5ef42d695'
+sha256sums=('d994fc157fae5aca97c4cf75fc204c45afc642ae6bd16a6574a0bdd65e657207'
             '3b05b3fbbda213d1c67d790b9b098ec962ca265b412f7e1b1024a1f16a3b583a')
 
 prepare() {
@@ -19,12 +19,17 @@ prepare() {
   mkdir build
 
   export PUB_CACHE="${srcdir}/pub-cache"
-  dart pub get --no-offline --no-precompile --suppress-analytics
+  dart pub get --no-offline --no-precompile
+}
+
+check() {
+  cd ${pkgname}
+  dart test
 }
 
 build() {
   cd ${pkgname}
-  dart compile exe bin/xivr.dart -o build/xivr --suppress-analytics
+  dart compile exe bin/xivr.dart -o build/xivr
 }
 
 package() {
