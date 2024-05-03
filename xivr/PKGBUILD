@@ -1,0 +1,40 @@
+# Maintainer: Anurag Roy <anuragr9847@gmail.com>
+pkgname="xivr"
+pkgver=1.0.0
+pkgrel=1
+pkgdesc='Wrapper for *sxiv with nice features'
+arch=('x86_64')
+url="https://github.com/royarg02/${pkgname}"
+license=('GPL-3.0-or-later')
+depends=('nsxiv' 'util-linux')
+makedepends=('dart')
+optdepends=('sxiv: alternative image viewer')
+source=("git+${url}#tag=${pkgver}"
+        "xivr.desktop")
+sha256sums=('d994fc157fae5aca97c4cf75fc204c45afc642ae6bd16a6574a0bdd65e657207'
+            '3b05b3fbbda213d1c67d790b9b098ec962ca265b412f7e1b1024a1f16a3b583a')
+
+prepare() {
+  cd ${pkgname}
+  mkdir build
+
+  export PUB_CACHE="${srcdir}/pub-cache"
+  dart pub get --no-offline --no-precompile
+}
+
+check() {
+  cd ${pkgname}
+  dart test
+}
+
+build() {
+  cd ${pkgname}
+  dart compile exe bin/xivr.dart -o build/xivr
+}
+
+package() {
+  install -Dm755 -t "${pkgdir}/usr/bin" "${pkgname}/build/xivr"
+  install -Dm644 -t "${pkgdir}/usr/share/applications" "${srcdir}/xivr.desktop"
+  install -Dm644 -t "${pkgdir}/usr/share/licenses/${pkgname}" "${pkgname}/LICENSE"
+}
+
