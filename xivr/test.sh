@@ -1,4 +1,4 @@
 #!/bin/sh
 
-xivr -h
+xivr --version
 
