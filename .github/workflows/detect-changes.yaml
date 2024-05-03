@@ -31,4 +31,5 @@ jobs:
             lf-royarg-bin: 'lf-royarg-bin/**'
             slock-royarg-git: 'slock-royarg-git/**'
             st-royarg-git: 'st-royarg-git/**'
+            xivr: 'xivr/**'
 
