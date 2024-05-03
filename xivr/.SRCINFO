@@ -5,6 +5,7 @@ pkgbase = xivr
 	url = https://github.com/royarg02/xivr
 	arch = x86_64
 	license = GPL-3.0-or-later
+	makedepends = git
 	makedepends = dart
 	depends = nsxiv
 	depends = util-linux

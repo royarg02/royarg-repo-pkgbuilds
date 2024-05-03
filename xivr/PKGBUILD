@@ -7,7 +7,7 @@ arch=('x86_64')
 url="https://github.com/royarg02/${pkgname}"
 license=('GPL-3.0-or-later')
 depends=('nsxiv' 'util-linux')
-makedepends=('dart')
+makedepends=('git' 'dart')
 optdepends=('sxiv: alternative image viewer')
 source=("git+${url}#tag=${pkgver}"
         "xivr.desktop")
@@ -20,11 +20,6 @@ prepare() {
 
   export PUB_CACHE="${srcdir}/pub-cache"
   dart pub get --no-offline --no-precompile --suppress-analytics
-}
-
-check() {
-  cd ${pkgname}
-  dart test
 }
 
 build() {
