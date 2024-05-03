@@ -1,5 +1,5 @@
 #!/bin/sh
 
-sudo -u pacman -R dart
+sudo -u pacman -R --noconfirm dart
 xivr --version
 
