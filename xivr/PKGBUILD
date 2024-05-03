@@ -19,17 +19,17 @@ prepare() {
   mkdir build
 
   export PUB_CACHE="${srcdir}/pub-cache"
-  dart --suppress-analytics pub get --no-offline --no-precompile
+  dart pub get --no-offline --no-precompile --suppress-analytics
 }
 
 check() {
   cd ${pkgname}
-  dart --suppress-analytics test
+  dart test
 }
 
 build() {
   cd ${pkgname}
-  dart --suppress-analytics compile exe bin/xivr.dart -o build/xivr
+  dart compile exe bin/xivr.dart -o build/xivr --suppress-analytics
 }
 
 package() {
