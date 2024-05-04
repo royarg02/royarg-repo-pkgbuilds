@@ -9,7 +9,7 @@ license=('GPL-3.0-or-later')
 depends=('nsxiv' 'util-linux')
 makedepends=('git' 'dart')
 optdepends=('sxiv: alternative image viewer')
-options=(!strip)
+options=(!strip !debug)
 source=("git+${url}#tag=${pkgver}"
         "xivr.desktop")
 sha256sums=('ba3e314159714e2b5bb30ba5ee41de4b331b453a536a319894d9ce505c295a81'

@@ -11,6 +11,7 @@ pkgbase = xivr
 	depends = util-linux
 	optdepends = sxiv: alternative image viewer
 	options = !strip
+	options = !debug
 	source = git+https://github.com/royarg02/xivr#tag=1.0.2
 	source = xivr.desktop
 	sha256sums = ba3e314159714e2b5bb30ba5ee41de4b331b453a536a319894d9ce505c295a81
