@@ -28,7 +28,7 @@ jobs:
         working-directory: ${{ matrix.package }}
     steps:
       - name: Checkout build files
-        uses: actions/checkout@44c2b7a8a4ea60a981eaca3cf939b5f4305c123b
+        uses: actions/checkout@a5ac7e51b41094c92402da3b24376905380afc29
       - name: Update container image
         run: pacman -Syu --noconfirm
       - name: Install git and wget
@@ -57,7 +57,7 @@ jobs:
             gpg --detach-sign --pinentry-mode loopback --passphrase --passphrase-fd 0 --output "${pkgfile}.sig" --sign "${pkgfile}" <<< "${{ secrets.GPG_PASSPHRASE }}"
           done
       - name: Checkout package repository
-        uses: actions/checkout@44c2b7a8a4ea60a981eaca3cf939b5f4305c123b
+        uses: actions/checkout@a5ac7e51b41094c92402da3b24376905380afc29
         with:
           repository: 'royarg02/royarg-repo'
           path: 'royarg-repo'
