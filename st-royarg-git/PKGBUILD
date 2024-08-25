@@ -35,7 +35,7 @@ package() {
   install -Dm644 README "$pkgdir"/usr/share/doc/$pkgname/README
   install -Dm644 LICENSE "$pkgdir"/usr/share/licenses/$pkgname/LICENSE
   chmod a+r "$pkgdir"/usr/share/applications/st.desktop
-  for i in $(grep -Po '(st.*)(?=\| )' st.info); do
+  for i in $(grep -Po '^st.*(?=\| )' st.info); do
     chmod a+r "$pkgdir"/usr/share/terminfo/s/"$i"
   done
 }
