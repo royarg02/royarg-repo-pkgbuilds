@@ -2,12 +2,13 @@ name: Set up permissions for build directories
 description: 'Changes permissions for build directories to be used by "nobody"'
 
 # makepkg does not run with root permissions. Use the "nobody" user to build
-# packages; this requires: modifying the permissions of the build directories
-# and NOPASSWD access to sudo
+# packages; this requires: removing the expire date, modifying the permissions
+# of the build directories and NOPASSWD access to sudo
 runs:
   using: "composite"
   steps:
     - run: |
+        chage -E -1 nobody
         chgrp -R nobody ${GITHUB_WORKSPACE}
         chmod -R g+ws ${GITHUB_WORKSPACE}
         setfacl -R -m u::rwx,g::rwx ${GITHUB_WORKSPACE}
