@@ -1,6 +1,6 @@
 pkgbase = xivr
 	pkgdesc = Wrapper for *sxiv with nice features
-	pkgver = 1.1.2
+	pkgver = 1.2.0
 	pkgrel = 1
 	url = https://github.com/royarg02/xivr
 	arch = x86_64
@@ -12,9 +12,9 @@ pkgbase = xivr
 	optdepends = sxiv: alternative image viewer
 	options = !strip
 	options = !debug
-	source = git+https://github.com/royarg02/xivr#tag=1.1.2
+	source = git+https://github.com/royarg02/xivr#tag=1.2.0
 	source = xivr.desktop
-	sha256sums = 97f764257306f8d3e8eb756b84a56751af4cb0f46c467b08888f0d4d7f561c85
+	sha256sums = 5dfc2e50689e84877cc568509c151da73380b12cd108f4f442d057c912f69485
 	sha256sums = 3b05b3fbbda213d1c67d790b9b098ec962ca265b412f7e1b1024a1f16a3b583a
 
 pkgname = xivr
