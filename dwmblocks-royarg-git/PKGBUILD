@@ -1,13 +1,13 @@
 # Maintainer: Anurag Roy <anuragr9847@gmail.com>
 _pkgname="dwmblocks"
 pkgname="$_pkgname-royarg-git"
-pkgver=1.0.r94.57214d0
+pkgver=1.0.r96.f0e75c6
 pkgrel=1
 pkgdesc="A modified version of the modular status bar for dwm written in C."
 arch=('x86_64')
 url="https://github.com/RoyARG02/$_pkgname"
 license=('ISC')
-depends=('sh' 'libx11')
+depends=('libx11')
 makedepends=('git')
 optdepends=('btop: system resource monitor'
   'figlet: expanded time display'
