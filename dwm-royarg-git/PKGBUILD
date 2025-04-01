@@ -7,6 +7,7 @@ pkgdesc="A modified version of the dynamic window manager for X."
 arch=('i686' 'x86_64')
 url="https://github.com/royarg02/$_pkgname"
 license=('MIT')
+depends=('libx11' 'libxft' 'libxinerama' 'freetype2')
 makedepends=('git')
 optdepends=('st: A simple virtual terminal emulator for X.')
 provides=("$_pkgname")
