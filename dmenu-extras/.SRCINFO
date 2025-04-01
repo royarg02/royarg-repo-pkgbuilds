@@ -1,0 +1,19 @@
+pkgbase = dmenu-extras
+	pkgdesc = Helper dmenu scripts for basic tasks
+	pkgver = 1.0.r2.e01a277
+	pkgrel = 1
+	url = https://github.com/royarg02/dmenu-extras
+	arch = any
+	license = GPL-3.0-or-later
+	makedepends = git
+	depends = dmenu
+	depends = curl
+	depends = gtk3
+	depends = systemd
+	depends = xclip
+	optdepends = libnotify: to notify update check and fetch for dm-emoji
+	conflicts = dmenu-extras-git
+	source = git+https://github.com/royarg02/dmenu-extras.git
+	md5sums = SKIP
+
+pkgname = dmenu-extras
