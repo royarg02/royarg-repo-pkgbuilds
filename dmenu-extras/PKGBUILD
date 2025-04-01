@@ -1,0 +1,29 @@
+# Maintainer: Anurag Roy <anuragr9847@gmail.com>
+pkgname="dmenu-extras"
+pkgver=1.0.r2.e01a277
+pkgrel=1
+pkgdesc="Helper dmenu scripts for basic tasks"
+arch=(any)
+url="https://github.com/royarg02/$pkgname"
+license=('GPL-3.0-or-later')
+depends=('dmenu' 'curl' 'gtk3' 'systemd' 'xclip')
+makedepends=('git')
+optdepends=('libnotify: to notify update check and fetch for dm-emoji')
+conflicts=("$pkgname-git")
+source=("git+$url.git")
+md5sums=('SKIP')
+options=(!debug)
+
+pkgver() {
+  cd "${pkgname}"
+  printf "1.0.r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
+}
+
+package() {
+  cd ${pkgname}
+  for i in $(ls dm-*); do
+    install -Dm755 "${i}" -t "${pkgdir}/usr/bin"
+  done
+  install -Dm644 README.md -t "${pkgdir}/usr/share/doc/${pkgname}"
+  install -Dm644 LICENSE -t "${pkgdir}/usr/share/licenses/${pkgname}"
+}
