@@ -1,23 +1,20 @@
 # Maintainer: Anurag Roy <anuragr9847@gmail.com>
 _pkgname="dwmblocks"
 pkgname="$_pkgname-royarg-git"
-pkgver=1.0.r96.f0e75c6
+pkgver=1.0.r98.dc7426b
 pkgrel=1
 pkgdesc="A modified version of the modular status bar for dwm written in C."
 arch=('x86_64')
 url="https://github.com/RoyARG02/$_pkgname"
 license=('ISC')
-depends=('libx11')
+depends=('libx11' 'wireplumber' 'xorg-xbacklight' 'xorg-xset')
 makedepends=('git')
 optdepends=('btop: system resource monitor'
   'figlet: expanded time display'
   'ncpamixer: audio mixer'
   'noto-fonts-emoji: for emoji support'
   'pulsemixer: audio mixer'
-  'playerctl: Control media players'
-  'ttf-joypixels: for emoji support'
-  'xorg-xbacklight: for controlling display backlight'
-  'xorg-xset: for controlling display sleep'
+  'playerctl: media player control using MPRIS'
 )
 provides=("$_pkgname")
 conflicts=("$_pkgname")
