@@ -26,6 +26,7 @@ jobs:
         with:
           filters: |
             dmenu-royarg-git: 'dmenu-royarg-git/**'
+            dmenu-extras: 'dmenu-extras/**'
             dwm-royarg-git: 'dwm-royarg-git/**'
             dwmblocks-royarg-git: 'dwmblocks-royarg-git/**'
             lf-royarg-bin: 'lf-royarg-bin/**'
