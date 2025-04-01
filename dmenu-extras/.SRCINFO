@@ -13,6 +13,7 @@ pkgbase = dmenu-extras
 	depends = xclip
 	optdepends = libnotify: to notify update check and fetch for dm-emoji
 	conflicts = dmenu-extras-git
+	options = !debug
 	source = git+https://github.com/royarg02/dmenu-extras.git
 	md5sums = SKIP
 

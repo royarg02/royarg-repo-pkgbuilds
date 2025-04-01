@@ -12,6 +12,7 @@ optdepends=('libnotify: to notify update check and fetch for dm-emoji')
 conflicts=("$pkgname-git")
 source=("git+$url.git")
 md5sums=('SKIP')
+options=(!debug)
 
 pkgver() {
   cd "${pkgname}"
