@@ -7,7 +7,7 @@ pkgdesc="A modified version of the dynamic menu for X, originally designed for d
 arch=('i686' 'x86_64')
 url="https://github.com/royarg02/$_pkgname"
 license=('MIT')
-depends=('sh' 'libx11' 'libxinerama' 'libxft' 'freetype2' 'fontconfig')
+depends=('sh' 'glibc' 'libx11' 'libxinerama' 'libxft' 'freetype2' 'fontconfig')
 makedepends=('git')
 optdepends=('dmenu-extras: helper scripts for basic tasks'
   'xorg-xrdb: for loading X resources'
@@ -16,6 +16,13 @@ provides=("$_pkgname")
 conflicts=("$_pkgname" "$_pkgname-git")
 source=("git+$url.git")
 md5sums=('SKIP')
+
+prepare() {
+  cd "$_pkgname"
+  echo "CPPFLAGS+=${CPPFLAGS}" >> config.mk
+  echo "CFLAGS+=${CFLAGS}" >> config.mk
+  echo "LDFLAGS+=${LDFLAGS}" >> config.mk
+}
 
 pkgver() {
   cd "$_pkgname"
