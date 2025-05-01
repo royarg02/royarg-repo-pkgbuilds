@@ -9,7 +9,6 @@ pkgbase = dmenu-extras
 	depends = dmenu
 	depends = curl
 	depends = gtk3
-	depends = elogind
 	depends = xclip
 	optdepends = libnotify: to notify update check and fetch for dm-emoji
 	conflicts = dmenu-extras-git
