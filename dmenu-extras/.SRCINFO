@@ -6,6 +6,7 @@ pkgbase = dmenu-extras
 	arch = any
 	license = GPL-3.0-or-later
 	makedepends = git
+	depends = sh
 	depends = dmenu
 	depends = curl
 	depends = gtk3
