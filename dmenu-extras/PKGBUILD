@@ -1,12 +1,12 @@
 # Maintainer: Anurag Roy <anuragr9847@gmail.com>
 pkgname="dmenu-extras"
-pkgver=1.0.r2.e01a277
+pkgver=1.0.r3.504e3c6
 pkgrel=1
 pkgdesc="Helper dmenu scripts for basic tasks"
 arch=(any)
 url="https://github.com/royarg02/$pkgname"
 license=('GPL-3.0-or-later')
-depends=('dmenu' 'curl' 'gtk3' 'systemd' 'xclip')
+depends=('sh' 'dmenu' 'curl' 'gtk3' 'xclip')
 makedepends=('git')
 optdepends=('libnotify: to notify update check and fetch for dm-emoji')
 conflicts=("$pkgname-git")
