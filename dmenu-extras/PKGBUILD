@@ -9,8 +9,8 @@ license=('GPL-3.0-or-later')
 depends=('sh' 'dmenu' 'curl' 'gtk3' 'xclip' 'imagemagick')
 makedepends=('git')
 optdepends=('libnotify: notifications for scripts'
-  'xorg-xprop: window selection for dm-scshot'
   'slop: region selection for dm-scshot'
+  'xorg-xprop: window selection for dm-scshot'
 )
 conflicts=("$pkgname-git")
 source=("git+$url.git")
