@@ -1,12 +1,12 @@
 # Maintainer: Anurag Roy <anuragr9847@gmail.com>
 pkgname="dmenu-extras"
-pkgver=1.0.r4.373f250
+pkgver=1.0.r5.262e78e
 pkgrel=1
 pkgdesc="Helper dmenu scripts for basic tasks"
 arch=(any)
 url="https://github.com/royarg02/$pkgname"
 license=('GPL-3.0-or-later')
-depends=('sh' 'dmenu' 'curl' 'gtk3' 'xclip' 'imagemagick')
+depends=('sh' 'dmenu' 'curl' 'gtk3' 'xclip' 'imagemagick' 'jq' 'xdg-utils')
 makedepends=('git')
 optdepends=('libnotify: notifications for scripts'
   'slop: region selection for dm-scshot'
