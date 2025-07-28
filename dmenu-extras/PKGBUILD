@@ -32,5 +32,5 @@ package() {
 
   # Properly install symlinks
   rm -f "${pkgdir}/usr/bin/dm-modify-bookmark" && \
-  ln -s "${pkgdir}/usr/bin/dm-bookmark" "${pkgdir}/usr/bin/dm-modify-bookmark"
+  ln -s "/usr/bin/dm-bookmark" "${pkgdir}/usr/bin/dm-modify-bookmark"
 }
