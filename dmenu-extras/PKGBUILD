@@ -1,7 +1,7 @@
 # Maintainer: Anurag Roy <anuragr9847@gmail.com>
 pkgname="dmenu-extras"
 pkgver=1.0.r5.262e78e
-pkgrel=2
+pkgrel=3
 pkgdesc="Helper dmenu scripts for basic tasks"
 arch=(any)
 url="https://github.com/royarg02/$pkgname"
@@ -25,10 +25,12 @@ pkgver() {
 package() {
   cd ${pkgname}
   for i in $(ls dm-*); do
-    # install dereferences symlinks, use cp instead
-    mkdir -p "${pkgdir}/usr/bin"
-    cp --preserve=mode "${i}" -t "${pkgdir}/usr/bin"
+    install -Dm755 "${i}" -t "${pkgdir}/usr/bin"
   done
   install -Dm644 README.md -t "${pkgdir}/usr/share/doc/${pkgname}"
   install -Dm644 LICENSE -t "${pkgdir}/usr/share/licenses/${pkgname}"
+
+  # Properly install symlinks
+  rm -f "${pkgdir}/usr/bin/dm-modify-bookmark" && \
+  ln -s "/usr/bin/dm-bookmark" "${pkgdir}/usr/bin/dm-modify-bookmark"
 }
