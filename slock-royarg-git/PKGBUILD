@@ -1,7 +1,7 @@
 # Maintainer: Anurag Roy <anuragr9847@gmail.com>
 _pkgname="slock"
 pkgname="$_pkgname-royarg-git"
-pkgver=1.5.r3.0d258d1
+pkgver=1.6.r0.4f12c34
 pkgrel=1
 pkgdesc="A modified version of the simple X display locker."
 arch=('i686' 'x86_64' 'armv7h')
