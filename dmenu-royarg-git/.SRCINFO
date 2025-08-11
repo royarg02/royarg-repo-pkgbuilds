@@ -1,6 +1,6 @@
 pkgbase = dmenu-royarg-git
 	pkgdesc = A modified version of the dynamic menu for X, originally designed for dwm.
-	pkgver = 5.3.r4.803e2a0
+	pkgver = 5.4.r0.fe6a90e
 	pkgrel = 1
 	url = https://github.com/royarg02/dmenu
 	arch = i686
