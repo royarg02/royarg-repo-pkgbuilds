@@ -1,6 +1,6 @@
 pkgbase = dwm-royarg-git
 	pkgdesc = A modified version of the dynamic window manager for X.
-	pkgver = 6.6.r0.a4790f9
+	pkgver = 6.6.r2.f1a3032
 	pkgrel = 1
 	url = https://github.com/royarg02/dwm
 	arch = i686
