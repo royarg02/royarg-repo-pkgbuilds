@@ -2,7 +2,7 @@
 _pkgname="dwmblocks"
 pkgname="$_pkgname-royarg-git"
 pkgver=1.0.r101.4c8dbdb
-pkgrel=1
+pkgrel=2
 pkgdesc="A modified version of the modular status bar for dwm written in C."
 arch=('x86_64')
 url="https://github.com/RoyARG02/$_pkgname"
@@ -10,7 +10,7 @@ license=('ISC')
 depends=('libx11' 'wireplumber' 'xorg-xbacklight' 'xorg-xset')
 makedepends=('git')
 optdepends=('figlet: expanded time display'
-  'noto-fonts-emoji: for emoji support'
+  'emoji-font: for emoji support'
   'playerctl: media player control using MPRIS'
 )
 provides=("$_pkgname")
