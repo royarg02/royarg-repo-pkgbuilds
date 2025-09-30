@@ -1,7 +1,7 @@
 pkgbase = dwmblocks-royarg-git
 	pkgdesc = A modified version of the modular status bar for dwm written in C.
 	pkgver = 1.0.r101.4c8dbdb
-	pkgrel = 1
+	pkgrel = 2
 	url = https://github.com/RoyARG02/dwmblocks
 	install = dwmblocks-royarg-git.install
 	arch = x86_64
@@ -12,7 +12,7 @@ pkgbase = dwmblocks-royarg-git
 	depends = xorg-xbacklight
 	depends = xorg-xset
 	optdepends = figlet: expanded time display
-	optdepends = noto-fonts-emoji: for emoji support
+	optdepends = emoji-font: for emoji support
 	optdepends = playerctl: media player control using MPRIS
 	provides = dwmblocks
 	conflicts = dwmblocks
