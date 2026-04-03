@@ -33,7 +33,7 @@ md5sums=('SKIP'
          'bdaf2fa29b712317b065c5eef9dcaf33'
          'b6b8e6cb13ee2dc7befc5b9d36087a0c'
          '816b8b8b8d906fb68ea23bcaf921ad37'
-         'b386bf2ae5878556331e0af3afdcfff9')
+         '6ceef0efd1feb3f9004a95f5c50ef026')
 
 prepare() {
   cd "$_pkgname"
