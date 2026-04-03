@@ -1,0 +1,31 @@
+commit 968606f612fe96df2e84fea1a4ae0b513e65f954
+Author: Anurag Roy <anuragr9847@gmail.com>
+Date:   Mon Jul 18 17:49:42 2022 +0530
+
+    Make terminfo file install location configurable through PREFIX
+
+diff --git a/Makefile b/Makefile
+index eacc2ef..346a26e 100644
+--- a/Makefile
++++ b/Makefile
+@@ -48,7 +48,7 @@ install: st
+ 	mkdir -p $(DESTDIR)$(MANPREFIX)/man1
+ 	sed "s/VERSION/$(VERSION)/g" < st.1 > $(DESTDIR)$(MANPREFIX)/man1/st.1
+ 	chmod 644 $(DESTDIR)$(MANPREFIX)/man1/st.1
+-	tic -sx st.info
++	tic -sx -o$(DESTDIR)$(TERMPREFIX) st.info
+ 	@echo Please see the README file regarding the terminfo entry of st.
+ 	mkdir -p $(DESTDIR)$(PREFIX)/share/applications
+ 	cp -f st.desktop $(DESTDIR)$(PREFIX)/share/applications
+diff --git a/config.mk b/config.mk
+index 49ede7e..d18eb8f 100644
+--- a/config.mk
++++ b/config.mk
+@@ -6,6 +6,7 @@ VERSION = 0.8.5
+ # paths
+ PREFIX = /usr/local
+ MANPREFIX = $(PREFIX)/share/man
++TERMPREFIX = $(PREFIX)/share/terminfo
+ 
+ X11INC = /usr/X11R6/include
+ X11LIB = /usr/X11R6/lib

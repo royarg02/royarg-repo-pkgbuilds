@@ -1,0 +1,52 @@
+diff --git a/config.def.h b/config.def.h
+index b7881da..46143be 100644
+--- a/config.def.h
++++ b/config.def.h
+@@ -226,8 +226,8 @@ ResourcePref resources[] = {
+  */
+ static MouseShortcut mshortcuts[] = {
+ 	/* mask                 button   function        argument       release */
+-	{ XK_ANY_MOD,           Button4, kscrollup,      {.i = 1},		0, /* !alt */ -1 },
+-	{ XK_ANY_MOD,           Button5, kscrolldown,    {.i = 1},		0, /* !alt */ -1 },
++	{ XK_ANY_MOD,           Button4, kscrollup,      {.i = 4},		0, /* !alt */ -1 },
++	{ XK_ANY_MOD,           Button5, kscrolldown,    {.i = 4},		0, /* !alt */ -1 },
+ 	{ XK_ANY_MOD,           Button2, selpaste,       {.i = 0},      1 },
+ 	{ ShiftMask,            Button4, ttysend,        {.s = "\033[5;2~"} },
+ 	{ XK_ANY_MOD,           Button4, ttysend,        {.s = "\031"} },
+diff --git a/st.1 b/st.1
+index 39120b4..85251d5 100644
+--- a/st.1
++++ b/st.1
+@@ -151,6 +151,9 @@ Decrease font size.
+ .B Ctrl-Shift-Home
+ Reset to default font size.
+ .TP
++.B Ctrl-Shift-Return
++Spawn a new terminal in the current working directory.
++.TP
+ .B Ctrl-Shift-y
+ Paste from primary selection (middle mouse button).
+ .TP
+@@ -163,6 +166,13 @@ Paste from the clipboard selection.
+ .B st
+ can be customized by creating a custom config.h and (re)compiling the source
+ code. This keeps it fast, secure and simple.
++.P
++Some options can be alternatively customized through
++.B Xresources
++with
++.B st
++prefix. See the source code for which settings can be provided through this
++method.
+ .SH AUTHORS
+ See the LICENSE file for the authors.
+ .SH LICENSE
+@@ -171,7 +181,8 @@ See the LICENSE file for the terms of redistribution.
+ .BR tabbed (1),
+ .BR utmp (1),
+ .BR stty (1),
+-.BR scroll (1)
++.BR scroll (1),
++.BR xrdb (1)
+ .SH BUGS
+ See the TODO file in the distribution.

@@ -1,19 +1,47 @@
 # Maintainer: Anurag Roy <anuragr9847@gmail.com>
 _pkgname="st"
 pkgname="$_pkgname-royarg-git"
-pkgver=0.9.3.r2.fc36985
+pkgver=0.9.3.r2.688f70a
 pkgrel=1
 pkgdesc="A modified version of the simple virtual terminal emulator for X."
 arch=('i686' 'x86_64' 'armv7h')
-url="https://github.com/royarg02/$_pkgname"
+url="https://st.suckless.org"
 license=('MIT')
 depends=('libxft')
 makedepends=('ncurses' 'git')
 optdepends=('xorg-xrdb: for loading X resources')
 provides=("$_pkgname")
 conflicts=("$_pkgname" "$_pkgname-git")
-source=("git+$url.git")
-md5sums=('SKIP')
+source=(
+  "git+https://git.suckless.org/st"
+  0001-st-scrollback-0.9.2.diff
+  0002-st-scrollback-mouse-altscreen-20260403-688f70a.diff
+  0003-st-scrollback-mouse-altscreen-newterm-20260403-688f70a.diff
+  0004-st-desktopentry-0.8.5.diff
+  0005-st-preserve-resize-20260403-688f70a.diff
+  0006-st-tic-o.diff
+  0007-st-expected-anysize-0.9.diff
+  0008-st-customxresources-20260403-688f70a.diff
+  0009-st-customsettings.diff
+)
+md5sums=('SKIP'
+         '52ec9630c053b6d3a49691981b08b6df'
+         '3aa422f3fdd2dc37034b29785b113fc3'
+         '96ab22d100c6d3f9fe5b2ef33a9600c7'
+         '59f4763feffedea7691f596b06b1371e'
+         '9ce99519e35f869dd421d00ba1e68e24'
+         'bdaf2fa29b712317b065c5eef9dcaf33'
+         'b6b8e6cb13ee2dc7befc5b9d36087a0c'
+         '816b8b8b8d906fb68ea23bcaf921ad37'
+         'b386bf2ae5878556331e0af3afdcfff9')
+
+prepare() {
+  cd "$_pkgname"
+
+  for i in ../*.diff; do
+    patch -Np1 -i $i
+  done
+}
 
 pkgver() {
   cd "$_pkgname"
