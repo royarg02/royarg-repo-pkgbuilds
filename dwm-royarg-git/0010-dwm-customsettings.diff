@@ -1,0 +1,256 @@
+diff --git a/config.def.h b/config.def.h
+index 995cde8..a29c21c 100644
+--- a/config.def.h
++++ b/config.def.h
+@@ -35,9 +35,12 @@ static const Rule rules[] = {
+ 	 *	WM_CLASS(STRING) = instance, class
+ 	 *	WM_NAME(STRING) = title
+ 	 */
+-	/* class      instance    title       tags mask     isfloating   monitor */
+-	{ "Gimp",     NULL,       NULL,       0,            1,           -1 },
+-	{ "Firefox",  NULL,       NULL,       1 << 8,       0,           -1 },
++	/* class               instance  title                     tags mask  isfloating  monitor */
++	{ "firefox",           NULL,     "About Mozilla Firefox",  0,         1,          -1 },
++	{ "firefox",           NULL,     "Picture-in-Picture",    ~0,         1,          -1 },
++	{ "Galculator",        NULL,     NULL,                     0,         1,          -1 },
++	{ "mpv",               NULL,     NULL,                     0,         1,          -1 },
++	{ NULL,                NULL,     "Picture-in-picture",    ~0,         1,          -1 },
+ };
+ 
+ /* layout(s) */
+@@ -55,7 +58,7 @@ static const Layout layouts[] = {
+ };
+ 
+ /* key definitions */
+-#define MODKEY Mod1Mask
++#define MODKEY Mod4Mask
+ #define TAGKEYS(KEY,TAG) \
+ 	{ MODKEY,                       KEY,      view,           {.ui = 1 << TAG} }, \
+ 	{ MODKEY|ControlMask,           KEY,      toggleview,     {.ui = 1 << TAG} }, \
+@@ -104,13 +107,11 @@ ResourcePref resources[] = {
+ 
+ static const Key keys[] = {
+ 	/* modifier                     key        function        argument */
+-	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
+-	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
+-	{ MODKEY,                       XK_b,      togglebar,      {0} },
++	{ MODKEY,                       XK_F11,    togglebar,      {0} },
+ 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
+ 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
+-	{ MODKEY,                       XK_i,      incnmaster,     {.i = +1 } },
+-	{ MODKEY,                       XK_d,      incnmaster,     {.i = -1 } },
++	{ MODKEY,                       XK_equal,  incnmaster,     {.i = +1 } },
++	{ MODKEY,                       XK_minus,  incnmaster,     {.i = -1 } },
+ 	{ MODKEY,                       XK_h,      setmfact,       {.f = -0.05} },
+ 	{ MODKEY,                       XK_l,      setmfact,       {.f = +0.05} },
+ 	{ MODKEY|ShiftMask,             XK_h,      setcfact,       {.f = +0.25} },
+@@ -118,10 +119,10 @@ static const Key keys[] = {
+ 	{ MODKEY|ShiftMask,             XK_o,      setcfact,       {.f =  0.00} },
+ 	{ MODKEY,                       XK_Return, zoom,           {0} },
+ 	{ MODKEY,                       XK_Tab,    view,           {0} },
+-	{ MODKEY|ShiftMask,             XK_c,      killclient,     {0} },
+-	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
+-	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} },
+-	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
++	{ MODKEY,                       XK_q,      killclient,     {0} },
++	{ MODKEY|ShiftMask,             XK_t,      setlayout,      {.v = &layouts[0]} },
++	{ MODKEY|ShiftMask,             XK_f,      setlayout,      {.v = &layouts[1]} },
++	{ MODKEY|ShiftMask,             XK_m,      setlayout,      {.v = &layouts[2]} },
+ 	{ MODKEY,                       XK_space,  setlayout,      {0} },
+ 	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
+ 	{ MODKEY,                       XK_0,      view,           {.ui = ~0 } },
+@@ -139,7 +140,6 @@ static const Key keys[] = {
+ 	TAGKEYS(                        XK_7,                      6)
+ 	TAGKEYS(                        XK_8,                      7)
+ 	TAGKEYS(                        XK_9,                      8)
+-	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
+ };
+ 
+ /* button definitions */
+diff --git a/dwm.1 b/dwm.1
+index ddc8321..8bccbc0 100644
+--- a/dwm.1
++++ b/dwm.1
+@@ -35,6 +35,13 @@ dwm draws a small border around windows to indicate the focus state.
+ .B \-v
+ prints version information to stderr, then exits.
+ .SH USAGE
++.P
++.B Mod
++in the following commands refer to
++.BR Mod4 ,
++or the
++.B SUPER/Windows
++key.
+ .SS Status bar
+ .TP
+ .B X root window name
+@@ -46,115 +53,127 @@ command.
+ click on a tag label to display all windows with that tag, click on the layout
+ label toggles between tiled and floating layout.
+ .TP
++.B Button2
++click on the window title to cycle the focused window between master and
++stacking area.
++.TP
+ .B Button3
+ click on a tag label adds/removes all windows with that tag to/from the view.
+ .TP
+-.B Mod1\-Button1
++.B Mod\-Button1
+ click on a tag label applies that tag to the focused window.
+ .TP
+-.B Mod1\-Button3
++.B Mod\-Button3
+ click on a tag label adds/removes that tag to/from the focused window.
+ .SS Keyboard commands
+ .TP
+-.B Mod1\-Shift\-Return
+-Start
+-.BR st(1).
+ .TP
+-.B Mod1\-p
+-Spawn
+-.BR dmenu(1)
+-for launching other programs.
+ .TP
+-.B Mod1\-,
++.B Mod\-,
+ Focus previous screen, if any.
+ .TP
+-.B Mod1\-.
++.B Mod\-.
+ Focus next screen, if any.
+ .TP
+-.B Mod1\-Shift\-,
++.B Mod\-Shift\-,
+ Send focused window to previous screen, if any.
+ .TP
+-.B Mod1\-Shift\-.
++.B Mod\-Shift\-.
+ Send focused window to next screen, if any.
+ .TP
+-.B Mod1\-b
+-Toggles bar on and off.
++.B Mod\-F11
++Toggles the default panel on or off.
+ .TP
+-.B Mod1\-t
++.B Mod\-Shift\-t
+ Sets tiled layout.
+ .TP
+-.B Mod1\-f
++.B Mod\-Shift\-f
+ Sets floating layout.
+ .TP
+-.B Mod1\-m
++.B Mod\-Shift\-m
+ Sets monocle layout.
+ .TP
+-.B Mod1\-space
++.B Mod\-space
+ Toggles between current and previous layout.
+ .TP
+-.B Mod1\-j
++.B Mod\-j
+ Focus next window.
+ .TP
+-.B Mod1\-k
++.B Mod\-k
+ Focus previous window.
+ .TP
+-.B Mod1\-i
++.B Mod\-=
+ Increase number of windows in master area.
+ .TP
+-.B Mod1\-d
++.B Mod\--
+ Decrease number of windows in master area.
+ .TP
+-.B Mod1\-l
++.B Mod\-l
+ Increase master area size.
+ .TP
+-.B Mod1\-h
++.B Mod\-h
+ Decrease master area size.
+ .TP
+-.B Mod1\-Return
++.B Mod\-Shift\-l
++Decrease height of the focused window with respect to other windows sharing the
++master/stacking area.
++.TP
++.B Mod\-Shift\-h
++Increase height of the focused window with respect to other windows sharing the
++master/stacking area.
++.TP
++.B Mod\-Shift\-o
++Reset all windows in the master/stacking area to have equal heights.
++.TP
++.B Mod\-Return
+ Zooms/cycles focused window to/from master area (tiled layouts only).
+ .TP
+-.B Mod1\-Shift\-c
++.B Mod\-q
+ Close focused window.
+ .TP
+-.B Mod1\-Shift\-space
++.B Mod\-Shift\-space
+ Toggle focused window between tiled and floating state.
+ .TP
+-.B Mod1\-Tab
++.B Mod\-Tab
+ Toggles to the previously selected tags.
+ .TP
+-.B Mod1\-Shift\-[1..n]
++.B Mod\-Shift\-[1..n]
+ Apply nth tag to focused window.
+ .TP
+-.B Mod1\-Shift\-0
++.B Mod\-Shift\-0
+ Apply all tags to focused window.
+ .TP
+-.B Mod1\-Control\-Shift\-[1..n]
++.B Mod\-Control\-Shift\-[1..n]
+ Add/remove nth tag to/from focused window.
+ .TP
+-.B Mod1\-[1..n]
++.B Mod\-[1..n]
+ View all windows with nth tag.
+ .TP
+-.B Mod1\-0
++.B Mod\-0
+ View all windows with any tag.
+ .TP
+-.B Mod1\-Control\-[1..n]
++.B Mod\-Control\-[1..n]
+ Add/remove all windows with nth tag to/from the view.
+-.TP
+-.B Mod1\-Shift\-q
+-Quit dwm.
+ .SS Mouse commands
+ .TP
+-.B Mod1\-Button1
++.B Mod\-Button1
+ Move focused window while dragging. Tiled windows will be toggled to the floating state.
+ .TP
+-.B Mod1\-Button2
++.B Mod\-Button2
+ Toggles focused window between floating and tiled state.
+ .TP
+-.B Mod1\-Button3
++.B Mod\-Button3
+ Resize focused window while dragging. Tiled windows will be toggled to the floating state.
+ .SH CUSTOMIZATION
+ dwm is customized by creating a custom config.h and (re)compiling the source
+ code. This keeps it fast, secure and simple.
++.P
++Some options can be alternatively customized through
++.B Xresources
++with
++.B dwm
++prefix. See the source code for which settings can be provided through this
++method.
+ .SH SEE ALSO
+ .BR dmenu (1),
+ .BR st (1)

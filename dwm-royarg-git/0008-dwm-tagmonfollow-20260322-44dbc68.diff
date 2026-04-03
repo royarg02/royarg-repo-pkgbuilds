@@ -1,0 +1,12 @@
+diff --git a/dwm.c b/dwm.c
+index ab3a84c..3687264 100644
+--- a/dwm.c
++++ b/dwm.c
+@@ -1682,6 +1682,7 @@ tagmon(const Arg *arg)
+ 	if (!selmon->sel || !mons->next)
+ 		return;
+ 	sendmon(selmon->sel, dirtomon(arg->i));
++	focusmon(arg);
+ }
+ 
+ void
