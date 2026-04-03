@@ -38,6 +38,9 @@ md5sums=('SKIP'
 prepare() {
   cd "$_pkgname"
 
+  # Remove files created by patches
+  rm st.desktop || true
+
   for i in ../*.diff; do
     patch -Np1 -i $i
   done
