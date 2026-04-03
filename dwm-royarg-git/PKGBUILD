@@ -1,22 +1,49 @@
 # Maintainer: Anurag Roy <anuragr9847@gmail.com>
 _pkgname="dwm"
 pkgname="$_pkgname-royarg-git"
-pkgver=6.8.r3.86278ed
+pkgver=6.8.r5.44dbc68
 pkgrel=1
 pkgdesc="A modified version of the dynamic window manager for X."
 arch=('i686' 'x86_64')
-url="https://github.com/royarg02/$_pkgname"
+url="https://dwm.suckless.org"
 license=('MIT')
 depends=('libx11' 'libxft' 'libxinerama' 'freetype2')
 makedepends=('git')
 optdepends=('st: A simple virtual terminal emulator for X.')
 provides=("$_pkgname")
 conflicts=("$_pkgname" "$_pkgname-git")
-source=("git+$url.git")
-md5sums=('SKIP')
+source=(
+  "git+https://git.suckless.org/dwm"
+  0001-dwm-systray-20260322-44dbc68.diff
+  0002-dwm-systray-statuscmd-20260322-44dbc68.diff
+  0003-dwm-focusonclick-20200110-61bb8b2.diff
+  0004-dwm-focusonclick-viewontag-20260322-44dbc68.diff
+  0005-dwm-focusonclick-viewontag-barheightspacing-20260322-44dbc68.diff
+  0006-dwm-cfacts-20200913-61bb8b2.diff
+  0007-dwm-resizecorners-6.5.diff
+  0008-dwm-tagmonfollow-20260322-44dbc68.diff
+  0009-dwm-customxresources-20260322-44dbc68.diff
+  0010-dwm-customsettings.diff
+)
+md5sums=('SKIP'
+         '18ede8284c6d9676fedf71743fef5e8c'
+         'f94d157cffc3fba4d78d6ebf49ec647f'
+         '9f3d9a3c9de73f82a30290ed29a3020b'
+         '0a68611f32c2bbb608e0e20ce3f35d64'
+         '65fd11f8238b93382e6670512914036b'
+         'c61a6eecb95bf2e0535334886c6d2ff5'
+         'faab7b9abb73fba6f306bd5d61de5016'
+         'a33b895ad553837847724dc841633b64'
+         '058235e4996ba5a210a34711d6b1befb'
+         '22b3d8a0c9b31778f59178c655825698')
 
 prepare() {
   cd "$_pkgname"
+
+  for i in ../*.diff; do
+    patch -Np1 -i $i
+  done
+
   sed -ri 's/((CPP|C|LD)FLAGS) *=/\1 +=/g' config.mk
 }
 
