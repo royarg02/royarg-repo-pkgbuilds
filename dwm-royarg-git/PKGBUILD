@@ -2,14 +2,16 @@
 _pkgname="dwm"
 pkgname="$_pkgname-royarg-git"
 pkgver=6.8.r5.44dbc68
-pkgrel=1
+pkgrel=2
 pkgdesc="A modified version of the dynamic window manager for X."
 arch=('i686' 'x86_64')
 url="https://dwm.suckless.org"
 license=('MIT')
 depends=('libx11' 'libxft' 'libxinerama' 'freetype2')
 makedepends=('git')
-optdepends=('st: A simple virtual terminal emulator for X.')
+optdepends=('st: A simple virtual terminal emulator for X.'
+  'xorg-xrdb: for loading X resources'
+)
 provides=("$_pkgname")
 conflicts=("$_pkgname" "$_pkgname-git")
 source=(
@@ -22,9 +24,11 @@ source=(
   0006-dwm-cfacts-20200913-61bb8b2.diff
   0007-dwm-resizecorners-6.5.diff
   0008-dwm-tagmonfollow-20260322-44dbc68.diff
-  0009-dwm-customxresources-20260322-44dbc68.diff
-  0010-dwm-customsettings.diff
+  0009-dwm-6.1-pertag_without_bar.diff
+  0010-dwm-customxresources-20260322-44dbc68.diff
+  0011-dwm-customsettings.diff
 )
+
 md5sums=('SKIP'
          '18ede8284c6d9676fedf71743fef5e8c'
          'f94d157cffc3fba4d78d6ebf49ec647f'
@@ -34,6 +38,7 @@ md5sums=('SKIP'
          'c61a6eecb95bf2e0535334886c6d2ff5'
          'faab7b9abb73fba6f306bd5d61de5016'
          'a33b895ad553837847724dc841633b64'
+         '47095fbaca08036206ec000aba470dc3'
          '058235e4996ba5a210a34711d6b1befb'
          '603c0d4a61d13bc919927573191a5097')
 
@@ -41,7 +46,9 @@ prepare() {
   cd "$_pkgname"
 
   for i in ../*.diff; do
+    echo "Patching ${i#../}..."
     patch -Np1 -i $i
+    echo "--------------------------------"
   done
 
   sed -ri 's/((CPP|C|LD)FLAGS) *=/\1 +=/g' config.mk
