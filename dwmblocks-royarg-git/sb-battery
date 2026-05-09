@@ -1,0 +1,50 @@
+#!/bin/sh
+
+# Prints all batteries, their percentage remaining and an emoji corresponding
+# to charge status (🔌 for plugged up, 🔋 for discharging on battery, etc.).
+
+case $BUTTON in
+  3) setsid -f "$TERMINAL" -e "$EDITOR" "$0" ;;
+esac
+
+calc_remaining_time() {
+  power_now="$(cat "$1/power_now")"
+  [ "$power_now" -eq 0 ] && return
+  energy_now="$(cat "$1/energy_now")"
+  timeleft="$(printf "%.2f" "$((100 * energy_now/power_now))e-2")"
+  h=${timeleft%.*}
+  [ -z "$h" ] && h=0
+  m=${timeleft#*.}
+  m="$(printf "%.0f" "$((${m#0*}*60))e-2")"
+  [ "$m" -lt 10 ] && m="0$m"
+  timeleft="($h:$m)"
+  printf "%s" "$timeleft"
+}
+
+# Loop through all attached batteries and format the info
+for battery in /sys/class/power_supply/BAT?*; do
+  # Sets up the status and capacity
+  capacity=$(cat "$battery/capacity")
+  case "$(cat "$battery/status")" in
+    "Full") status="⚡" ;;
+    "Discharging")
+        # If discharging, obtain battery remaining time and warn if low
+        if [ "$capacity" -le 20 ]; then
+          status="🪫"
+          [ "$capacity" -le 10 ] && warn="❗" || warn="❕"
+        else
+          status="🔋"
+        fi
+        timeleft=$(calc_remaining_time "$battery")
+        [ -n "$timeleft" ] && timeleft=" $timeleft"
+      ;;
+    "Charging") status="🔌" ;;
+    "Not charging") status="🛑" ;;
+    "Unknown") status="❔" ;;
+  esac
+
+  # Prints the info
+  printf "%s%s%s %d%%" "$status" "$warn" "$timeleft" "$capacity"; unset warn
+done
+exit 0
+

@@ -1,0 +1,23 @@
+#!/bin/sh
+
+# Prints the current volume of default wireplumbler source.
+
+SOURCE="@DEFAULT_AUDIO_SOURCE@"
+
+case $BUTTON in
+  1) wpctl set-mute "$SOURCE" toggle ;;
+  3) setsid -f "$TERMINAL" -e "$EDITOR" "$0";;
+  4) wpctl set-volume "$SOURCE" 5%+ ;;
+  5) wpctl set-volume "$SOURCE" 5%- ;;
+esac
+
+until [ -n "$vol" ]; do
+  vol="$(wpctl get-volume $SOURCE)"
+done
+
+level="$(echo "$vol" | cut -d' ' -f2 | xargs -I @ printf "%0.f" @e2)"
+muted="$(echo "$vol" | cut -d' ' -f3)"
+
+[ "$muted" ] && icon=🙊 || icon=🎙
+
+printf "%s %s%%" "$icon" "$level"

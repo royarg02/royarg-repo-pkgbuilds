@@ -1,0 +1,30 @@
+#!/bin/sh
+
+case $BUTTON in
+  1) playerctl previous ;;
+  2) playerctl play-pause ;;
+  3) playerctl next ;;
+  4) playerctl position 10+ ;;
+  5) playerctl position 10- ;;
+esac
+
+case "$(playerctl status -s)" in
+  # Media players generally show the pause icon while playing and the play icon
+  # while paused.
+  "Paused")
+    status="▶️"
+    nometadatatitle="Media playback paused" ;;
+  "Playing")
+    status="⏸️"
+    nometadatatitle="Currently playing media" ;;
+  *) exit 0 ;;
+esac
+
+artist="$(playerctl -s metadata artist)"
+title="$(playerctl -s metadata title)"
+
+[ -n "$artist" ] && [ -n "$title" ] && separator=" - "
+[ -z "$artist" ] && [ -z "$title" ] && title="$nometadatatitle"
+
+printf "%s%s%s%s" "$status" "$title" "$separator" "$artist"
+

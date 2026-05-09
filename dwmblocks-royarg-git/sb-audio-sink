@@ -1,0 +1,33 @@
+#!/bin/sh
+
+# Prints the current volume of default wireplumber sink
+
+SINK="@DEFAULT_AUDIO_SINK@"
+
+case $BUTTON in
+  1) wpctl set-mute "$SINK" toggle ;;
+  3) setsid -f "$TERMINAL" -e "$EDITOR" "$0";;
+  4) wpctl set-volume "$SINK" 5%+ ;;
+  5) wpctl set-volume "$SINK" 5%- ;;
+esac
+
+until [ -n "$vol" ]; do
+  vol="$(wpctl get-volume $SINK)"
+done
+
+level="$(echo "$vol" | cut -d' ' -f2 | xargs -I @ printf "%0.f" @e2)"
+muted="$(echo "$vol" | cut -d' ' -f3)"
+
+if [ "$muted" ] ; then
+  icon="🔇"
+elif [ "$level" -lt 30 ]; then
+  icon="🔈"
+elif [ "$level" -lt 70 ]; then
+  icon="🔉"
+elif [ "$level" -lt 100 ]; then
+  icon="🔊"
+else
+  icon="📢"
+fi
+
+printf "%s %s%%" "$icon" "$level"
