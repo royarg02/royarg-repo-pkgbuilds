@@ -1,0 +1,18 @@
+#!/bin/sh
+
+# Displays the current time and calendar
+
+rows="$(tput lines)"
+columns="$(tput cols)"
+date '+%A, %d %B, %Y %I:%M:%S'
+if [ "$rows" -gt 8 ]; then
+  if [ "$columns" -gt 74 ]; then
+    if [ "$rows" -gt 32 ]; then
+      cal -yw --color=always | tail -n +2
+    else
+      cal -3w --color=always
+    fi
+  else
+    cal -w --color=always
+  fi
+fi

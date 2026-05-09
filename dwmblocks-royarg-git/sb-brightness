@@ -1,0 +1,33 @@
+#!/bin/sh
+
+# Prints the current display brightness.
+#
+# Depends on xbacklight.
+
+toggle_presentation_mode() {
+  if [ -z "$present" ]; then
+    xset s off; xset -dpms
+    present=" 🖥"
+  else
+    xset s on; xset +dpms
+    present=""
+  fi
+}
+
+# If the X screensaver timeout is zero, dpms is inactive
+[ "$(xset q | awk '/timeout/{print $2}')" = 0 ] && present=" 🖥" || present=""
+
+case $BUTTON in
+  1) toggle_presentation_mode ;;
+  3) setsid -f "$TERMINAL" -e "$EDITOR" "$0" ;;
+  4) xbacklight -inc 1 ;;
+  5) xbacklight -dec 1 ;;
+esac
+
+# Get the brightness in percentage
+brightness=$(xbacklight -get)
+
+# Prints the info
+printf "🔆 %s%%%s" "$brightness" "$present"
+exit 0
+

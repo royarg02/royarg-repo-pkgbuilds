@@ -1,0 +1,13 @@
+diff --git a/src/block.c b/src/block.c
+index a6c919d..ebe55b3 100644
+--- a/src/block.c
++++ b/src/block.c
+@@ -72,7 +72,7 @@ int block_execute(block *const block, const uint8_t button) {
+         if (button != 0) {
+             char button_str[4];
+             (void)snprintf(button_str, LEN(button_str), "%hhu", button);
+-            status |= setenv("BLOCK_BUTTON", button_str, 1);
++            status |= setenv("BUTTON", button_str, 1);
+         }
+ 
+         const char null = '\0';

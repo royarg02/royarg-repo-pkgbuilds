@@ -1,16 +1,16 @@
 # Maintainer: Anurag Roy <anuragr9847@gmail.com>
 _pkgname="dwmblocks"
 pkgname="$_pkgname-royarg-git"
-pkgver=1.0.r101.4c8dbdb
-pkgrel=2
-pkgdesc="A modified version of the modular status bar for dwm written in C."
+pkgver=1.0.r74.469e684
+pkgrel=1
+epoch=1
+pkgdesc="A modular status bar for dwm written in C. Async version."
 arch=('x86_64')
-url="https://github.com/RoyARG02/$_pkgname"
-license=('ISC')
+url="https://github.com/UtkarshVerma/$_pkgname-async"
+license=('GPL-2.0-only')
 depends=('libx11' 'wireplumber' 'xorg-xbacklight' 'xorg-xset')
 makedepends=('git')
-optdepends=('figlet: expanded time display'
-  'emoji-font: for emoji support'
+optdepends=('emoji-font: for emoji support'
   'playerctl: media player control using MPRIS'
 )
 provides=("$_pkgname")
@@ -18,24 +18,61 @@ conflicts=("$_pkgname")
 install="$pkgname.install"
 source=(
   "git+$url.git"
+  0001-env-variable.patch
+  0002-blocks-truncate-ellipsis.patch
+  0003-customsettings.patch
+  sb-audio-sink
+  sb-audio-source
+  sb-battery
+  sb-brightness
+  sb-clock
+  sb-clock-display
+  sb-memory
+  sb-nettraf
+  sb-now-playing
 )
-md5sums=('SKIP')
+
+md5sums=('SKIP'
+         '87bf017f4bee132bf5928305aa1cdb1c'
+         '0a0f1e1789b1056b4cb10721e5c7cd92'
+         '651fd197428fd2934d4c529dcdc48aee'
+         '4aa39c7880640a4985312d078fc11340'
+         '41f0e616a85e378069b8dd526bc3c7ea'
+         '14d3e557a758f6656afefec20a890a69'
+         '92f10d595f928464af2fac365c2ee3a8'
+         'd10d07d33df335251acb426c411c3e1f'
+         '883a673c6660e395c3a6219b57ec38a0'
+         'e330dd86a92c0d6fad88640e94e02ba2'
+         '8aca79f031f40cbd4bcdabf6eacf0855'
+         'bd47536a0323ea869f330ab60df5a7d8')
+
+prepare() {
+  cd "$_pkgname-async"
+  for i in ../*.patch; do
+    echo "Patching ${i#../}..."
+    patch -Np1 -i $i
+    echo "--------------------------------"
+  done
+}
 
 pkgver() {
-  cd "$_pkgname"
+  cd "$_pkgname-async"
   commits="$(git rev-list --count HEAD)"
   gitref="$(git rev-parse --short=7 HEAD)"
   printf "1.0.r%s.%s" "$commits" "$gitref"
 }
 
 build() {
-  cd "$_pkgname"
+  cd "$_pkgname-async"
   make
 }
 
 package() {
-  cd "$_pkgname"
+  cd "$_pkgname-async"
   make PREFIX=/usr DESTDIR="$pkgdir" install
   install -Dm644 README.md "$pkgdir"/usr/share/doc/$pkgname/README.md
   install -Dm644 LICENSE "$pkgdir"/usr/share/licenses/$pkgname/LICENSE
+  for i in $(ls ../sb-*); do
+    install -Dm755 "${i}" -t "${pkgdir}/usr/bin"
+  done
 }
