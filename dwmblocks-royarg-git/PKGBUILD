@@ -2,7 +2,7 @@
 _pkgname="dwmblocks"
 pkgname="$_pkgname-royarg-git"
 pkgver=1.0.r74.469e684
-pkgrel=1
+pkgrel=2
 epoch=1
 pkgdesc="A modular status bar for dwm written in C. Async version."
 arch=('x86_64')
@@ -34,7 +34,7 @@ source=(
 
 md5sums=('SKIP'
          '87bf017f4bee132bf5928305aa1cdb1c'
-         '0a0f1e1789b1056b4cb10721e5c7cd92'
+         '1b59a8b11dbb3ef9a6f8ab9142e1e5ff'
          '651fd197428fd2934d4c529dcdc48aee'
          '4aa39c7880640a4985312d078fc11340'
          '41f0e616a85e378069b8dd526bc3c7ea'
