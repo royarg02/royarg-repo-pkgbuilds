@@ -1,14 +1,12 @@
 diff --git a/src/util.c b/src/util.c
-index 10485db..8f702dd 100644
+index 10485db..4a44531 100644
 --- a/src/util.c
 +++ b/src/util.c
-@@ -14,11 +14,13 @@ unsigned int gcd(unsigned int a, unsigned int b) {
- 
- size_t truncate_utf8_string(char* const buffer, const size_t size,
+@@ -16,9 +16,11 @@ size_t truncate_utf8_string(char* const buffer, const size_t size,
                              const size_t char_limit) {
-+    unsigned short ellipsis = 1;
      size_t char_count = 0;
      size_t i = 0;
++    unsigned short ellipsis = 1;
      while (char_count < char_limit) {
          char ch = buffer[i];
          if (ch == '\0') {
@@ -16,13 +14,22 @@ index 10485db..8f702dd 100644
              break;
          }
  
-@@ -43,6 +45,9 @@ size_t truncate_utf8_string(char* const buffer, const size_t size,
+@@ -43,6 +45,18 @@ size_t truncate_utf8_string(char* const buffer, const size_t size,
          i += skip;
      }
  
 +    if (ellipsis) {
-+      buffer[i-3] = buffer[i-2] = buffer[i-1] = '.';
++      // Minimum spaces to skip for ellipsis
++      unsigned short skip = 3;
++      // Unicode continuation byte. 10xxxxxx
++      while (!(~buffer[i - skip] & UTF8_MULTIBYTE_BIT) && !(buffer[i - skip] & BIT(6))) {
++        ++skip;
++      }
++      // End of string after ellipsis
++      i = i - skip + 3;
++      buffer[i - 3] = buffer[i - 2] = buffer[i - 1] = '.';
 +    }
++
      buffer[i] = '\0';
  
      return i + 1;
