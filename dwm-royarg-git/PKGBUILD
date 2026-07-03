@@ -2,7 +2,7 @@
 _pkgname="dwm"
 pkgname="$_pkgname-royarg-git"
 pkgver=6.8.r5.44dbc68
-pkgrel=2
+pkgrel=3
 pkgdesc="A modified version of the dynamic window manager for X."
 arch=('i686' 'x86_64')
 url="https://dwm.suckless.org"
@@ -25,8 +25,9 @@ source=(
   0007-dwm-resizecorners-6.5.diff
   0008-dwm-tagmonfollow-20260322-44dbc68.diff
   0009-dwm-6.1-pertag_without_bar.diff
-  0010-dwm-customxresources-20260322-44dbc68.diff
-  0011-dwm-customsettings.diff
+  0010-dwm-preventfocusshift-20240831-6.5.diff
+  0011-dwm-customxresources-20260322-44dbc68.diff
+  0012-dwm-customsettings.diff
 )
 
 md5sums=('SKIP'
@@ -39,6 +40,7 @@ md5sums=('SKIP'
          'faab7b9abb73fba6f306bd5d61de5016'
          'a33b895ad553837847724dc841633b64'
          '47095fbaca08036206ec000aba470dc3'
+         '5e03dfab03fedae8d111b0f872d9423e'
          '058235e4996ba5a210a34711d6b1befb'
          '603c0d4a61d13bc919927573191a5097')
 
