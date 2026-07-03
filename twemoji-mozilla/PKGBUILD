@@ -1,12 +1,15 @@
-pkgname=twemoji-mozilla
+# Maintainer: Anurag Roy <anuragr9847@gmail.com>
+_fontname="twemoji"
+pkgname="$_fontname-mozilla"
 pkgver=0.7.0
 pkgrel=1
 pkgdesc="Twitter color emoji font from Mozilla Firefox"
-url="https://github.com/mozilla/twemoji-colr"
 arch=('any')
+url="https://github.com/mozilla/twemoji-colr"
 license=('Apache-2.0' 'CC-BY-4.0')
 depends=('firefox')
 provides=('emoji-font' 'twemoji-color-font')
+conflicts=("$pkgname-fontconfig")
 source=("https://raw.githubusercontent.com/mozilla/twemoji-colr/refs/tags/v$pkgver/LICENSE.md")
 
 sha256sums=('64419edc28e9163204c3be73f835a8dfc34cd6c9b8f7d067bb685f119f839a99')
