@@ -1,0 +1,18 @@
+pkgname=twemoji-mozilla
+pkgver=0.7.0
+pkgrel=1
+pkgdesc="Twitter color emoji font from Mozilla Firefox"
+url="https://github.com/mozilla/twemoji-colr"
+arch=('any')
+license=('Apache-2.0' 'CC-BY-4.0')
+depends=('firefox')
+provides=('emoji-font' 'twemoji-color-font')
+source=("https://raw.githubusercontent.com/mozilla/twemoji-colr/refs/tags/v$pkgver/LICENSE.md")
+
+sha256sums=('64419edc28e9163204c3be73f835a8dfc34cd6c9b8f7d067bb685f119f839a99')
+
+package() {
+  install -dm755 "$pkgdir/usr/share/fonts/$pkgname"
+  ln -s "/usr/lib/firefox/fonts/TwemojiMozilla.ttf" "$pkgdir/usr/share/fonts/$pkgname/"
+  install -Dm644 -t "$pkgdir/usr/share/licenses/$pkgname" "$srcdir/LICENSE.md"
+}
