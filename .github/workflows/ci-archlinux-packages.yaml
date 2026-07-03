@@ -41,6 +41,8 @@ jobs:
         uses: ./.github/actions/enable-royarg-repo
       - name: Modify permissions for build directories
         uses: ./.github/actions/perm-build-dirs
+      - name: Disable makepkg debug
+        uses: ./.github/actions/makepkg-no-debug
       - name: Validate PKGBUILD
         run: namcap PKGBUILD
       - name: Validate SRCINFO
