@@ -1,7 +1,7 @@
 # Maintainer: Anurag Roy <anuragr9847@gmail.com>
 _pkgname="st"
 pkgname="$_pkgname-royarg-git"
-pkgver=0.9.3.r2.688f70a
+pkgver=0.9.3.r3.04ce0d6
 pkgrel=1
 pkgdesc="A modified version of the simple virtual terminal emulator for X."
 arch=('i686' 'x86_64' 'armv7h')
