@@ -1,0 +1,8 @@
+name: Disable debug option for makepkg
+description: 'Disable debug option for makepkg'
+
+runs:
+  using: "composite"
+  steps:
+    - run: echo "OPTIONS+=(!debug)" >> /etc/makepkg.conf
+      shell: bash
