@@ -1,29 +1,48 @@
 # Maintainer: Anurag Roy <anuragr9847@gmail.com>
 _pkgname="slock"
 pkgname="$_pkgname-royarg-git"
-pkgver=1.6.r3.aa9ff37
+pkgver=1.7.r0.b04f4d0
 pkgrel=1
 pkgdesc="A modified version of the simple X display locker."
 arch=('i686' 'x86_64' 'armv7h')
-url="https://github.com/RoyARG02/$_pkgname"
+url="https://tools.suckless.org/slock"
 license=('MIT')
 depends=('libxext' 'libxcrypt' 'libxrandr')
 makedepends=('git')
 optdepends=('xorg-xrdb: for loading X resources')
 provides=("$_pkgname")
 conflicts=("$_pkgname" "$_pkgname-git")
-source=("git+$url.git")
-md5sums=('SKIP')
+source=(
+  "git+https://git.suckless.org/slock"
+  0001-slock-dpms-20231017-4f04554.diff
+  0002-slock-capscolor-20220921-35633d4.diff
+  0003-slock-dpms-capscolor-xresources-20260730-b04f4d0.diff
+  0004-slock-customsettings.diff
+)
+
+md5sums=('SKIP'
+         'a1245ce1fed52261225cf2ecebb9bb48'
+         '6a35ed629404b70e5586f7e833e00c16'
+         'a3b1909974e23296a77dcd6e850031ed'
+         '3d61874960fa70f357ddb5d6cf3d94d8')
 
 prepare() {
   cd "$_pkgname"
+
+  for i in ../*.diff; do
+    echo "Patching ${i#../}..."
+    patch -Np1 -i $i
+    echo "--------------------------------"
+  done
+
   sed -ri 's/((CPP|C|LD)FLAGS) =/\1 +=/g' config.mk
 }
 
-pkgver() {
-  cd "$_pkgname"
-  git describe --long --tags | sed 's/\([^-]*-\)g/r\1/;s/-/./g'
-}
+# Uncomment when the current release is tagged
+#pkgver() {
+#  cd "$_pkgname"
+#  git describe --long --tags | sed 's/\([^-]*-\)g/r\1/;s/-/./g'
+#}
 
 build() {
   cd "$_pkgname"
