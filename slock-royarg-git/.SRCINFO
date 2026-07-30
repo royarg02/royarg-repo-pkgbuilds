@@ -1,8 +1,8 @@
 pkgbase = slock-royarg-git
 	pkgdesc = A modified version of the simple X display locker.
-	pkgver = 1.6.r3.aa9ff37
+	pkgver = 1.7.r0.b04f4d0
 	pkgrel = 1
-	url = https://github.com/RoyARG02/slock
+	url = https://tools.suckless.org/slock
 	arch = i686
 	arch = x86_64
 	arch = armv7h
@@ -15,7 +15,15 @@ pkgbase = slock-royarg-git
 	provides = slock
 	conflicts = slock
 	conflicts = slock-git
-	source = git+https://github.com/RoyARG02/slock.git
+	source = git+https://git.suckless.org/slock
+	source = 0001-slock-dpms-20231017-4f04554.diff
+	source = 0002-slock-capscolor-20220921-35633d4.diff
+	source = 0003-slock-dpms-capscolor-xresources-20260730-b04f4d0.diff
+	source = 0004-slock-customsettings.diff
 	md5sums = SKIP
+	md5sums = a1245ce1fed52261225cf2ecebb9bb48
+	md5sums = 6a35ed629404b70e5586f7e833e00c16
+	md5sums = a3b1909974e23296a77dcd6e850031ed
+	md5sums = 3d61874960fa70f357ddb5d6cf3d94d8
 
 pkgname = slock-royarg-git
