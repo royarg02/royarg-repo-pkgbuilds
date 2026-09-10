@@ -1,13 +1,3 @@
-From 4259049ca8d06a34c828c70298f3a8fdb8c5104c Mon Sep 17 00:00:00 2001
-From: mortezadadgar <mortezadadgar97@gmail.com>
-Date: Sat, 23 Sep 2023 18:45:58 +0330
-Subject: [PATCH] Update to respect prevoius state of dpms
-
----
- config.def.h |  3 +++
- slock.c      | 26 ++++++++++++++++++++++++++
- 2 files changed, 29 insertions(+)
-
 diff --git a/config.def.h b/config.def.h
 index 9855e21..d01bd38 100644
 --- a/config.def.h
@@ -20,7 +10,7 @@ index 9855e21..d01bd38 100644
 +/* time in seconds before the monitor shuts down */
 +static const int monitortime = 5;
 diff --git a/slock.c b/slock.c
-index 5ae738c..b5ac721 100644
+index 9c587e1..5f141dc 100644
 --- a/slock.c
 +++ b/slock.c
 @@ -1,4 +1,5 @@
@@ -37,16 +27,16 @@ index 5ae738c..b5ac721 100644
  #include <X11/keysym.h>
  #include <X11/Xlib.h>
  #include <X11/Xutil.h>
-@@ -314,6 +316,8 @@ main(int argc, char **argv) {
+@@ -316,6 +318,8 @@ main(int argc, char **argv) {
  	const char *hash;
  	Display *dpy;
  	int s, nlocks, nscreens;
 +	CARD16 standby, suspend, off;
 +	BOOL dpms_state;
  
- 	ARGBEGIN {
- 	case 'v':
-@@ -374,6 +378,22 @@ main(int argc, char **argv) {
+ 	if (argc > 1 && !strcmp(argv[1], "-v")) {
+ 		puts("slock-"VERSION);
+@@ -375,8 +379,30 @@ main(int argc, char **argv) {
  	if (nlocks != nscreens)
  		return 1;
  
@@ -66,10 +56,6 @@ index 5ae738c..b5ac721 100644
 +
 +	XSync(dpy, 0);
 +
- 	/* run post-lock command */
- 	if (argc > 0) {
- 		switch (fork()) {
-@@ -391,5 +411,11 @@ main(int argc, char **argv) {
  	/* everything is now blank. Wait for the correct password */
  	readpw(dpy, &rr, locks, nscreens, hash);
  
@@ -81,6 +67,3 @@ index 5ae738c..b5ac721 100644
 +
  	return 0;
  }
--- 
-2.42.0
-
