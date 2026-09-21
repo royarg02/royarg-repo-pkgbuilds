@@ -1,0 +1,70 @@
+diff --git a/config.def.h b/config.def.h
+index 1edb647..dd3eb31 100644
+--- a/config.def.h
++++ b/config.def.h
+@@ -21,3 +21,6 @@ static unsigned int lines      = 0;
+  * for example: " /?\"&[]"
+  */
+ static const char worddelimiters[] = " ";
++
++/* Size of the window border */
++static unsigned int border_width = 0;
+diff --git a/dmenu.1 b/dmenu.1
+index ed0e442..a491df7 100644
+--- a/dmenu.1
++++ b/dmenu.1
+@@ -26,6 +26,8 @@ dmenu \- dynamic menu
+ .IR color ]
+ .RB [ \-w
+ .IR windowid ]
++.RB [ \-bw
++.IR borderwidth ]
+ .P
+ .BR dmenu_run " ..."
+ .SH DESCRIPTION
+@@ -90,6 +92,9 @@ prints version information to stdout, then exits.
+ .TP
+ .BI \-w " windowid"
+ embed into windowid.
++.TP
++.BI \-bw " borderwidth"
++defines the border width.
+ .SH USAGE
+ dmenu is completely controlled by the keyboard.  Items are selected using the
+ arrow keys, page up, page down, home, and end.
+diff --git a/dmenu.c b/dmenu.c
+index dc879a8..101d5c1 100644
+--- a/dmenu.c
++++ b/dmenu.c
+@@ -854,9 +854,11 @@ setup(void)
+ 	swa.event_mask = ExposureMask | KeyPressMask | VisibilityChangeMask |
+ 	                 ButtonPressMask | PointerMotionMask;
+ 
+-	win = XCreateWindow(dpy, root, x, y, mw, mh, 0,
++	win = XCreateWindow(dpy, root, x, y - (topbar ? 0 : border_width * 2), mw - border_width * 2, mh, border_width,
+ 	                    CopyFromParent, CopyFromParent, CopyFromParent,
+ 	                    CWOverrideRedirect | CWBackPixel | CWEventMask, &swa);
++	if (border_width)
++		XSetWindowBorder(dpy, win, scheme[SchemeSel][ColBg].pixel);
+ 	XSetClassHint(dpy, win, &ch);
+ 
+ 	/* input methods */
+@@ -885,7 +887,8 @@ static void
+ usage(void)
+ {
+ 	die("usage: dmenu [-bfiv] [-l lines] [-p prompt] [-fn font] [-m monitor]\n"
+-	    "             [-nb color] [-nf color] [-sb color] [-sf color] [-w windowid]");
++	    "             [-nb color] [-nf color] [-sb color] [-sf color] [-w windowid]\n"
++	    "             [-bw borderwidth]");
+ }
+ 
+ int
+@@ -931,6 +934,8 @@ main(int argc, char *argv[])
+ 			colors[SchemeOut][ColFg] = argv[++i];
+ 		else if (!strcmp(argv[i], "-w"))   /* embedding window id */
+ 			embed = argv[++i];
++		else if (!strcmp(argv[i], "-bw"))
++			border_width = atoi(argv[++i]); /* border width */
+ 		else
+ 			usage();
+ 
