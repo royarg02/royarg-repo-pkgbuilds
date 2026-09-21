@@ -1,0 +1,48 @@
+diff --git a/dmenu.1 b/dmenu.1
+index a491df7..e8f2870 100644
+--- a/dmenu.1
++++ b/dmenu.1
+@@ -28,6 +28,8 @@ dmenu \- dynamic menu
+ .IR windowid ]
+ .RB [ \-bw
+ .IR borderwidth ]
++.RB [ \-it
++.IR text ]
+ .P
+ .BR dmenu_run " ..."
+ .SH DESCRIPTION
+@@ -95,6 +97,9 @@ embed into windowid.
+ .TP
+ .BI \-bw " borderwidth"
+ defines the border width.
++.TP
++.BI \-it " text".
++start with initial text input.
+ .SH USAGE
+ dmenu is completely controlled by the keyboard.  Items are selected using the
+ arrow keys, page up, page down, home, and end.
+diff --git a/dmenu.c b/dmenu.c
+index 101d5c1..5a961c3 100644
+--- a/dmenu.c
++++ b/dmenu.c
+@@ -888,7 +888,7 @@ usage(void)
+ {
+ 	die("usage: dmenu [-bfiv] [-l lines] [-p prompt] [-fn font] [-m monitor]\n"
+ 	    "             [-nb color] [-nf color] [-sb color] [-sf color] [-w windowid]\n"
+-	    "             [-bw borderwidth]");
++	    "             [-bw borderwidth] [-it text]");
+ }
+ 
+ int
+@@ -936,7 +936,10 @@ main(int argc, char *argv[])
+ 			embed = argv[++i];
+ 		else if (!strcmp(argv[i], "-bw"))
+ 			border_width = atoi(argv[++i]); /* border width */
+-		else
++		else if (!strcmp(argv[i], "-it")) {   /* embedding window id */
++			const char * text = argv[++i];
++			insert(text, strlen(text));
++		} else
+ 			usage();
+ 
+ 	if (!setlocale(LC_CTYPE, "") || !XSupportsLocale())

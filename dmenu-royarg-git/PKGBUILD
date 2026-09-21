@@ -1,11 +1,11 @@
 # Maintainer: Anurag Roy <anuragr9847@gmail.com>
 _pkgname="dmenu"
 pkgname="$_pkgname-royarg-git"
-pkgver=5.4.r3.911396b
+pkgver=5.4.r6.61e0072
 pkgrel=1
 pkgdesc="A modified version of the dynamic menu for X, originally designed for dwm."
 arch=('i686' 'x86_64')
-url="https://github.com/royarg02/$_pkgname"
+url="https://tools.suckless.org/dmenu"
 license=('MIT')
 depends=('sh' 'glibc' 'libx11' 'libxinerama' 'libxft' 'freetype2' 'fontconfig')
 makedepends=('git')
@@ -14,11 +14,41 @@ optdepends=('dmenu-extras: helper scripts for basic tasks'
 )
 provides=("$_pkgname")
 conflicts=("$_pkgname" "$_pkgname-git")
-source=("git+$url.git")
-md5sums=('SKIP')
+source=(
+  "git+https://git.suckless.org/dmenu"
+  0001-dmenu-linesbelowprompt-and-fullwidth-20260921-61e0072.diff
+  0002-dmenu-numbers-20250318-b1e217b.diff
+  0003-dmenu-mousesupport-5.4.diff
+  0004-dmenu-mousesupport-motion-5.4.diff
+  0005-dmenu-mousesupport-motion-border-20260921-61e0072.diff
+  0006-dmenu-mousesupport-motion-border-initialtext-20260921-61e0072.diff
+  0007-dmenu-mousesupport-motion-border-initialtext-xyw-20260921-61e0072.diff
+  0008-dmenu-mousesupport-motion-border-initialtext-xyw-lineheight-20260921-61e0072.diff
+  0009-dmenu-mousesupport-motion-border-initialtext-xyw-lineheight-fuzzymatch-20260921-61e0072.diff
+  0010-dmenu-customxresources-20260921-61e0072.diff
+)
+
+md5sums=('SKIP'
+         '46ab5d61b805f508ece34c7b5bd4f6aa'
+         'd3ffefd0d3bb71267aca5dffee3bbeb5'
+         'bfe7e883cd33dd71f492717ae1f5badb'
+         '7fe9969ec667fcfd3979bdc3e9539f0f'
+         '7be042443dc6f29ece3414730d4caa2e'
+         'e2606dcf5e02f6e82d44c9e298378948'
+         'a177ce1af946c938be69f4e03f0c107d'
+         'dd72fc6e101a061dc1a48fcf600a4c06'
+         'b781cf48dd19a9cc8477527cbd501e48'
+         '56469df5192f0f65c92225f78947a569')
 
 prepare() {
   cd "$_pkgname"
+
+  for i in ../*.diff; do
+    echo "Patching ${i#../}..."
+    patch -Np1 -i $i
+    echo "--------------------------------"
+  done
+
   echo "CPPFLAGS+=${CPPFLAGS}" >> config.mk
   echo "CFLAGS+=${CFLAGS}" >> config.mk
   echo "LDFLAGS+=${LDFLAGS}" >> config.mk
