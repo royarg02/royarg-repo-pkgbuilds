@@ -1,6 +1,6 @@
 pkgbase = dmenu-royarg-git
 	pkgdesc = A modified version of the dynamic menu for X, originally designed for dwm.
-	pkgver = 5.4.r6.61e0072
+	pkgver = 5.4.r7.8627d0c
 	pkgrel = 1
 	url = https://tools.suckless.org/dmenu
 	arch = i686
