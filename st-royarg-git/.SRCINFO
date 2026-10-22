@@ -1,6 +1,6 @@
 pkgbase = st-royarg-git
 	pkgdesc = A modified version of the simple virtual terminal emulator for X.
-	pkgver = 0.9.3.r3.04ce0d6
+	pkgver = 0.9.3.r6.fdaadd5
 	pkgrel = 1
 	url = https://st.suckless.org
 	arch = i686
