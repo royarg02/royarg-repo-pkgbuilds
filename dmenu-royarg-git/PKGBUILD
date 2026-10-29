@@ -1,7 +1,7 @@
 # Maintainer: Anurag Roy <anuragr9847@gmail.com>
 _pkgname="dmenu"
 pkgname="$_pkgname-royarg-git"
-pkgver=5.4.r7.8627d0c
+pkgver=5.4.r9.bfb0716
 pkgrel=1
 pkgdesc="A modified version of the dynamic menu for X, originally designed for dwm."
 arch=('i686' 'x86_64')
@@ -24,7 +24,7 @@ source=(
   0006-dmenu-mousesupport-motion-border-initialtext-20260921-61e0072.diff
   0007-dmenu-mousesupport-motion-border-initialtext-xyw-20260921-61e0072.diff
   0008-dmenu-mousesupport-motion-border-initialtext-xyw-lineheight-20260921-61e0072.diff
-  0009-dmenu-mousesupport-motion-border-initialtext-xyw-lineheight-fuzzymatch-20260921-61e0072.diff
+  0009-dmenu-mousesupport-motion-border-initialtext-xyw-lineheight-fuzzymatch-20261027-7c0334d.diff
   0010-dmenu-customxresources-20260921-61e0072.diff
 )
 
@@ -37,7 +37,7 @@ md5sums=('SKIP'
          'e2606dcf5e02f6e82d44c9e298378948'
          'a177ce1af946c938be69f4e03f0c107d'
          'dd72fc6e101a061dc1a48fcf600a4c06'
-         'b781cf48dd19a9cc8477527cbd501e48'
+         '495a7e9df594bc324098ef83d7818433'
          '56469df5192f0f65c92225f78947a569')
 
 prepare() {
