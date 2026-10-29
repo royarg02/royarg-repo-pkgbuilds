@@ -1,7 +1,7 @@
 # Maintainer: Anurag Roy <anuragr9847@gmail.com>
 _pkgname="dwm"
 pkgname="$_pkgname-royarg-git"
-pkgver=6.8.r12.bca7cf2
+pkgver=6.8.r13.f08763b
 pkgrel=1
 pkgdesc="A modified version of the dynamic window manager for X."
 arch=('i686' 'x86_64')
@@ -24,7 +24,7 @@ source=(
   0006-dwm-cfacts-20200913-61bb8b2.diff
   0007-dwm-resizecorners-6.5.diff
   0008-dwm-tagmonfollow-20260322-44dbc68.diff
-  0009-dwm-pertag_without_bar-20261013-ce41d34.diff
+  0009-dwm-pertag_without_bar-20261028-f08763b.diff
   0010-dwm-preventfocusshift-20240831-6.5.diff
   0011-dwm-customxresources-20261013-bca7cf2.diff
   0012-dwm-customsettings.diff
@@ -39,7 +39,7 @@ md5sums=('SKIP'
          'c61a6eecb95bf2e0535334886c6d2ff5'
          'faab7b9abb73fba6f306bd5d61de5016'
          'a33b895ad553837847724dc841633b64'
-         'f65cecb7816113000c38cda133a7080a'
+         'd1a690931e2d3adee1855ad978ada904'
          '5e03dfab03fedae8d111b0f872d9423e'
          'b915f3b210024e32a6c3bd78d260facc'
          '603c0d4a61d13bc919927573191a5097')
