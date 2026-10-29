@@ -47,18 +47,18 @@ index e963712..7a6e67d 100644
  dmenu grabs the keyboard before reading stdin if not reading from a tty. This
  is faster, but will lock up X until stdin reaches end\-of\-file.
 diff --git a/dmenu.c b/dmenu.c
-index 011f22b..c273475 100644
+index e735de5..48d735b 100644
 --- a/dmenu.c
 +++ b/dmenu.c
-@@ -1,6 +1,7 @@
- /* See LICENSE file for copyright and license details. */
+@@ -2,6 +2,7 @@
  #include <ctype.h>
  #include <locale.h>
+ #include <stdint.h>
 +#include <math.h>
  #include <stdio.h>
  #include <stdlib.h>
  #include <string.h>
-@@ -33,6 +34,7 @@ struct item {
+@@ -34,6 +35,7 @@ struct item {
  	char *text;
  	struct item *left, *right;
  	int out;
@@ -66,7 +66,7 @@ index 011f22b..c273475 100644
  };
  
  static char numbers[NUMBERSBUFSIZE] = "";
-@@ -250,9 +252,93 @@ grabkeyboard(void)
+@@ -251,9 +253,93 @@ grabkeyboard(void)
  	die("cannot grab keyboard");
  }
  
@@ -160,7 +160,7 @@ index 011f22b..c273475 100644
  	static char **tokv = NULL;
  	static int tokn = 0;
  
-@@ -890,7 +976,7 @@ setup(void)
+@@ -894,7 +980,7 @@ setup(void)
  static void
  usage(void)
  {
@@ -169,7 +169,7 @@ index 011f22b..c273475 100644
  	    "             [-x xoffset] [-y yoffset] [-z width]\n"
  	    "             [-nb color] [-nf color] [-sb color] [-sf color] [-w windowid]\n"
  	    "             [-bw borderwidth] [-it text]");
-@@ -909,6 +995,8 @@ main(int argc, char *argv[])
+@@ -913,6 +999,8 @@ main(int argc, char *argv[])
  			exit(0);
  		} else if (!strcmp(argv[i], "-b")) /* appears at the bottom of the screen */
  			topbar = 0;

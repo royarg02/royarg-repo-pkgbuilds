@@ -1,6 +1,6 @@
 pkgbase = dmenu-royarg-git
 	pkgdesc = A modified version of the dynamic menu for X, originally designed for dwm.
-	pkgver = 5.4.r7.8627d0c
+	pkgver = 5.4.r9.bfb0716
 	pkgrel = 1
 	url = https://tools.suckless.org/dmenu
 	arch = i686
@@ -28,7 +28,7 @@ pkgbase = dmenu-royarg-git
 	source = 0006-dmenu-mousesupport-motion-border-initialtext-20260921-61e0072.diff
 	source = 0007-dmenu-mousesupport-motion-border-initialtext-xyw-20260921-61e0072.diff
 	source = 0008-dmenu-mousesupport-motion-border-initialtext-xyw-lineheight-20260921-61e0072.diff
-	source = 0009-dmenu-mousesupport-motion-border-initialtext-xyw-lineheight-fuzzymatch-20260921-61e0072.diff
+	source = 0009-dmenu-mousesupport-motion-border-initialtext-xyw-lineheight-fuzzymatch-20261027-7c0334d.diff
 	source = 0010-dmenu-customxresources-20260921-61e0072.diff
 	md5sums = SKIP
 	md5sums = 46ab5d61b805f508ece34c7b5bd4f6aa
@@ -39,7 +39,7 @@ pkgbase = dmenu-royarg-git
 	md5sums = e2606dcf5e02f6e82d44c9e298378948
 	md5sums = a177ce1af946c938be69f4e03f0c107d
 	md5sums = dd72fc6e101a061dc1a48fcf600a4c06
-	md5sums = b781cf48dd19a9cc8477527cbd501e48
+	md5sums = 495a7e9df594bc324098ef83d7818433
 	md5sums = 56469df5192f0f65c92225f78947a569
 
 pkgname = dmenu-royarg-git
